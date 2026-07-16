@@ -102,11 +102,7 @@ cd environment/scalismo_ssm
 ./sbt_build.sh compile
 ```
 
-`sbt_build.sh` is a thin wrapper around `sbt`. When the repository path
-contains a `:` character (some cloud-mount layouts do), `sbt` mis-parses it as
-a classpath separator; the wrapper detects this and rsyncs the project to a
-colon-free cache directory before delegating to `sbt`. In the common case
-where the path is colon-free it simply runs `sbt` in-place.
+`sbt_build.sh` is a thin wrapper around `sbt`.
 
 The Scalismo wrapper (`src/ssm/scalismo.py`, invoked by the `ssm_registration`
 stage) resolves Java via `JAVA_HOME` then falls back to `~/jdk-17.0.13+11`;
@@ -146,13 +142,6 @@ ingestion  →  adjusted
 mesh_extraction  →  ssm_registration  →  ssm_pca  →  radiomics_correlation
      →  ssm_viewer  →  ssm_qa_metrics  →  ssm_qa_residuals  →  visualizations
 ```
-
-Two stages dominate wall-clock time. `mesh_extraction` is a cohort-wide one-off
-(NIfTI to 24 per-rib STLs per patient, tens of minutes for the full cohort);
-STLs already on disk are not re-extracted, so it is typically run once per data
-drop. `ssm_registration` shells out to the Scala / sbt project at
-`environment/scalismo_ssm/` and takes hours on a full cohort, parallel over
-patients × 24 ribs. Everything else is fast.
 
 ### Shipped presets
 
@@ -418,9 +407,7 @@ Runs are scripted, seeded and version-controlled. Raw data is never modified.
 | HC1        | Heteroskedasticity-Consistent (HC1) sandwich SE estimator |
 | ICP        | Iterative Closest Point (rigid registration step) |
 | L / R      | Left / Right (rib side) |
-| LBFGS      | Limited-memory Broyden-Fletcher-Goldfarb-Shanno optimiser |
 | LM         | Linear Model (OLS) |
-| LMM        | Linear Mixed Model |
 | LOO        | Leave-One-Out (cross-validation) |
 | MSE        | Mean Squared Error |
 | NAKO       | Nationale Kohorte (German National Cohort study) |
