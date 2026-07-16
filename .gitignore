@@ -1,0 +1,35 @@
+# Python environment
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Scala / sbt
+environment/scalismo_ssm/project/target
+environment/scalismo_ssm/target
+
+# IDE
+.idea/
+.vscode/
+
+# macOS
+.DS_Store
+.AppleDouble
+
+# Manuscript
+manuscript/
+
+# Github workflows
+.github/workflows
+
+# Deprecated old-pipeline files preserved on-disk for reference
+/.deprecated/
+
+# Local files — *.local.* is reserved for host-local sidecars
+*.local.*
+
+

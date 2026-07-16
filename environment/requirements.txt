@@ -1,0 +1,33 @@
+# Core numerics
+numpy==2.4.4
+scipy==1.16.3
+pandas==3.0.2
+pyarrow==23.0.1        # parquet I/O
+
+# Medical imaging I/O
+nibabel==5.4.2
+openpyxl==3.1.5        # Excel (.xlsx) support for pandas
+
+# Statistical modelling
+statsmodels==0.14.6
+
+# Machine learning / shape models
+scikit-learn==1.8.0
+
+# Mesh processing
+scikit-image==0.26.0   # marching cubes
+trimesh==4.11.5
+pyvista==0.47.1
+pyacvd==0.3.2          # ACVD isotropic remeshing of templates (uses pyvista, no GL dep)
+
+# Plotting
+matplotlib==3.10.8
+seaborn==0.13.2
+plotly==6.7.0          # interactive HTML figures
+kaleido>=1.0.0,<2.0.0  # static (SVG / PDF / PNG) export for plotly figures
+altair>=6.0,<7.0       # parallel grammar-of-graphics backend (see _altair.py modules)
+vl-convert-python>=1.8.0 # static export for altair charts (Rust binary, no Chromium); 1.8.0 is altair 6's floor
+
+# Utilities
+pyyaml==6.0.3
+tqdm==4.67.3

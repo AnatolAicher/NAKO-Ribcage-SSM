@@ -1,0 +1,35 @@
+# Smoke-test preset: tiny cohort, all knobs at defaults. Used by
+# tests/test_pipeline_smoke.py and for quick end-to-end checks.
+
+name: "smoke"
+n_patients: 5
+template_id: "REPLACE_ME_WITH_A_PATIENT_ID"
+
+stages:
+  ingestion:        true
+  adjusted:         true
+  mesh_extraction:  false
+  ssm_registration: true
+  ssm_pca:          true
+  radiomics_correlation: true
+  ssm_viewer:       true
+  ssm_qa_metrics:   true
+  ssm_qa_residuals: true
+  visualizations:   true
+
+ssm:
+  workers:             8
+  variance_threshold:  0.95
+  bidirectional:       false
+
+qa:
+  eval_max_modes:             10
+  eval_n_specificity_samples: 50
+  eval_n_loo_folds:           0             
+  eval_skip_whole_cage:       false
+  eval_workers:               1             
+  residual_worst_n:           3
+  residual_scope:            "whole-cage"
+
+paths:
+  root: "REPLACE_ME_WITH_AN_ABSOLUTE_PATH"

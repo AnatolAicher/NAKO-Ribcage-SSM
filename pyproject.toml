@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nako_ribs"
+version = "0.1.0"
+description = "Statistical and surface shape-model analysis of the human rib cage in the NAKO cohort."
+readme = "README.md"
+requires-python = ">=3.13"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Anatol Aicher", email = "anatol.aicher@uzh.ch"},
+]
+keywords = ["statistical-shape-model", "PCA", "GPA", "rib", "NAKO", "scalismo"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+    "Topic :: Scientific/Engineering :: Image Processing",
+]
+dynamic = ["dependencies"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+]
+
+[project.urls]
+Repository = "https://github.com/AnatolAicher/NAKO-Human-Ribcage-Statistical-Shape-Model"
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["environment/requirements.txt"]}
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+py-modules = ["settings"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["bivariate*", "adjusted*", "data_ingestion*", "ssm*", "utils*", "visualizations*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "src/utils"]
+python_files = ["test_*.py"]

@@ -1,0 +1,44 @@
+name: "full_analysis"
+
+n_patients: null
+
+template_id: "REPLACE_ME_WITH_A_PATIENT_ID"
+
+stages:
+  ingestion:        true
+  adjusted:         true
+  mesh_extraction:  true
+  ssm_registration: true
+  ssm_pca:          true
+  radiomics_correlation: true
+  ssm_viewer:       true
+  ssm_qa_metrics:   true
+  ssm_qa_residuals: false
+  visualizations:   true
+
+mesh:
+  target_faces_per_rib: 1000
+
+ssm:
+  workers:             256
+  variance_threshold: 0.95
+  bidirectional: false
+
+paths:
+  root: "REPLACE_ME_WITH_AN_ABSOLUTE_PATH"
+
+qa:
+  eval_max_modes:             25
+  eval_n_specificity_samples: 200           
+  eval_n_loo_folds:           100           
+  eval_skip_whole_cage:       false         
+  eval_workers:               100           
+  residual_worst_n:           6
+  residual_scope:            "whole-cage"
+
+methodology_figure:
+  display_patient: 100001
+  radiomics_rib:
+    vert_level: 14            
+    side: "R"
+  n_pcs_for_score_table: 10  

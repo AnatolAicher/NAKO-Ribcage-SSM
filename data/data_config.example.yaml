@@ -1,0 +1,72 @@
+# Data path configuration — template.
+# Copy to data_config.yaml (gitignored) and fill in the paths for your system.
+
+paths:
+  # Per-patient analytic JSON files (shape descriptors + PIR centerline paths).
+  # ``json_analytics_base`` is scanned two levels deep (block/patient_id);
+  # ``json_analytics_pattern`` then formats the per-file path. Placeholders:
+  # {base}, {block}, {patient_id}.
+  json_analytics_base: "/path/to/derivatives_inference_proc_RIB_HE_508"
+  json_analytics_pattern: "{base}/{block}/{patient_id}/vibe/sub-{patient_id}_sequ-stitched_acq-ax_mod-vibe_seg-rib_stat.json"
+
+  # Patient metadata (loader reads xlsx).
+  metadata_table: "/path/to/NAKO-733_Studiendaten/NAKO-733_247_30k_export_baseline.xlsx"
+
+  # Per-rib-level NIfTI masks (seg-vert-rib labels 40–51 = anatomical ribs 1–12).
+  # Used by SSM mesh extraction.
+  nifti_base: "/path/to/derivatives_inference_proc_RIB_HE_508"
+  nifti_vert_rib_pattern: "{base}/{block}/{patient_id}/vibe/sub-{patient_id}_sequ-stitched_acq-ax_mod-vibe_seg-vert-rib_msk.nii.gz"
+
+  # Raw VIBE MRI volumes — used only by the one-patient methodology figure
+  # rendered in the visualisations stage. Optional: leave unset if the figure
+  # is not wired in any preset's methodology_figure block.
+  mri_nifti_base: "/path/to/derivatives_inference_proc_RIB_HE_508"
+  mri_nifti_pattern: "{base}/{block}/{patient_id}/vibe/sub-{patient_id}_sequ-stitched_acq-ax_mod-vibe.nii.gz"
+
+  # SSM mesh output dirs (extracted/registered STLs) belong to the preset
+  # (presets/*.yaml :: paths.root).
+
+# NIfTI configuration
+nifti:
+  rib_level_labels: [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+
+# Exclusion criteria — applied during ingestion (documented in
+# <run-dir>/ingestion/exclusions.csv).
+exclusion_criteria:
+  rib_count:
+    # Strict equality: each patient must contribute exactly 24 rib-side rows.
+    min_rib_sides: 24
+    max_rib_sides: 24
+  metadata_completeness:
+    # Complete-case analysis; missingness < 3 % per variable.
+    require_complete_columns:
+      - sex
+      - age
+      - smoking_status
+      - pack_years
+      - height_cm
+      - weight_kg
+      - bmi
+      - body_fat_pct
+  segmentation_components:
+    # Each rib label (40-51) must yield exactly two connected components
+    # (left + right). Computed from the segmentation NIfTI at ingestion.
+    require_two_components_per_rib: true
+  segmentation_quality:
+    # Segmentations touching the image border or split ribs may have
+    # incomplete shape measurements.
+    exclude_if_any_seg_at_border: true
+    exclude_if_any_split: true
+
+# Metadata columns to load from the Excel (NAKO codebook variable names).
+# Loader: data_ingestion.loaders.load_metadata.
+metadata_columns:
+  - ID
+  - basis_sex
+  - basis_age
+  - a_smok_stat_qn
+  - a_packyears
+  - a_anthro_groe
+  - a_anthro_gew
+  - a_anthro_bmi
+  - a_anthro_fettmasse

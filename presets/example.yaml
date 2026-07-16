@@ -1,0 +1,79 @@
+# Example preset for scripts/run_pipeline.py.
+#
+# Usage:
+#   python scripts/run_pipeline.py presets/example.yaml
+#
+# `name` appears in the run-dir name (results/<name>_<timestamp>/) and in
+# metadata.json.
+
+name: "main"
+
+# Cohort size cap; null = full cohort. Honoured by ingestion,
+# mesh_extraction and ssm_registration.
+n_patients: null
+
+# Patient ID used as the registration template. The driver writes it to
+# <registered_stl_dir>/template_id.txt before the SSM stages run.
+template_id: "REPLACE_ME_WITH_A_PATIENT_ID"
+
+# Per-stage on/off flags. Stages run in declared order.
+stages:
+  ingestion:             true   # JSON + Excel → analytic_clean.parquet + QC
+  adjusted:              true   # rib-level descriptor models (unadjusted + adjusted)
+  mesh_extraction:       true   # slow cohort-wide step
+  ssm_registration:      true   # Scalismo non-rigid registration
+  ssm_pca:               true   # GPA + PCA + PC regression + figures
+  radiomics_correlation: true   # PC × rib × radiomics-feature heatmaps
+  ssm_viewer:            true   # self-contained interactive HTML
+  ssm_qa_metrics:        true   # Styner triad
+  ssm_qa_residuals:      true   # worst-N residual mosaic
+  visualizations:        true   # supplemental cross-stage figures
+
+# Mesh extraction knobs (override settings.py).
+# Path-based skip: STLs already on disk in paths.extracted_stl_dir are NOT
+# re-extracted when this changes; delete the dir to force re-extraction.
+mesh:
+  target_faces_per_rib: 1000
+
+# SSM knobs (Scalismo registration + PCA).
+ssm:
+  # Single --workers override applied to every parallelised stage, not only
+  # Scalismo registration. Absent → library defaults (32).
+  workers: 32
+
+  # PCA truncation: smallest k whose cumulative variance ≥ threshold.
+  # Stored in pca_surface.npz; cache invalidates on mismatch.
+  variance_threshold: 0.95
+
+  # Bidirectional (symmetric) correspondences in the non-rigid ICP. Each
+  # iteration adds reverse observations (target sampled → projected onto
+  # the current deformed reference → lifted back) under distance + normal
+  # filters only. Default off.
+  bidirectional: false
+
+# Root directory for all per-preset artifacts (REQUIRED). The pipeline
+# derives every per-preset path beneath it:
+#
+#   <root>/<name>/extracted_stl/
+#   <root>/<name>/registered_stl/
+#   <root>/<name>/results/<name>_<timestamp>/  +  <name>_latest symlink
+paths:
+  root: "REPLACE_ME_WITH_AN_ABSOLUTE_PATH"
+
+# QA stage tuning.
+qa:
+  eval_max_modes:             25            # PCA modes evaluated by the Styner triad (0 = up to min(N-1, D))
+  eval_n_specificity_samples: 1000          # random model samples for specificity
+  eval_n_loo_folds:           10            # K-fold generalisation; 0 = true leave-one-out (O(N^2), expensive at large N)
+  eval_skip_whole_cage:       false         
+  eval_workers:               1             
+  residual_worst_n:           6
+  residual_scope:            "whole-cage"   # or "rib" with residual_rib_id (e.g. "rib7_R")
+  # residual_rib_id:         "rib7_R"
+
+# Optional: nine-panel one-patient methodology overview rendered by the
+# visualizations stage. Uncomment + set display_patient to enable.
+# methodology_figure:
+#   display_patient: 100001
+#   radiomics_rib: { vert_level: 14, side: "R" }   # rib 7 R
+#   n_pcs_for_score_table: 10
