@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/1240422816.svg)](https://doi.org/10.5281/zenodo.22230693)
+
 # NAKO Human Ribcage Statistical Shape Model
 
 Statistical analysis and statistical shape modelling (SSM) of the human rib
