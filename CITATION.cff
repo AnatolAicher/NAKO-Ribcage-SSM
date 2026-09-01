@@ -1,0 +1,101 @@
+cff-version: 1.2.0
+message: If you use this software or the shape model, please cite it as below.
+type: software
+title: NAKO Human Ribcage Statistical Shape Model
+abstract: 'Population-level statistical shape model of the complete 24-rib human rib cage from 26,275
+  whole-body MRI scans of the German National Cohort (NAKO): mean shape, principal modes, a demographics-to-shape
+  generator, and the pipeline that produced them.'
+version: 1.1.0
+date-released: '2026-09-01'
+license: MIT
+doi: 10.5281/zenodo.22230693
+repository-code: https://github.com/AnatolAicher/NAKO-Ribcage-SSM
+url: https://anatolaicher.github.io/NAKO-Ribcage-Manuscript/
+keywords:
+- statistical shape model
+- rib cage
+- NAKO
+- German National Cohort
+- whole-body MRI
+- principal component analysis
+- Scalismo
+authors:
+- family-names: Aicher
+  given-names: Anatol
+  orcid: https://orcid.org/0009-0001-5554-086X
+  email: anatol.aicher@uzh.ch
+  affiliation: Institute for Diagnostic and Interventional Radiology, University Hospital Zurich
+- family-names: Graf
+  given-names: Robert
+  affiliation: Department of Diagnostic and Interventional Neuroradiology, School of Medicine and Health,
+    Technical University of Munich University Hospital; Chair for AI in Healthcare and Medicine, School
+    of Computation, Information and Technology, Technical University of Munich (TUM)
+- family-names: Kirschke
+  given-names: Jan
+  affiliation: Department of Diagnostic and Interventional Neuroradiology, School of Medicine and Health,
+    Technical University of Munich University Hospital
+- family-names: Frauenfelder
+  given-names: Thomas
+  affiliation: Institute for Diagnostic and Interventional Radiology, University Hospital Zurich
+- family-names: Ensle
+  given-names: Falko
+  affiliation: Department of Quantitative Biomedicine, University of Zurich
+- family-names: Menze
+  given-names: Bjoern
+  affiliation: Department of Quantitative Biomedicine, University of Zurich
+- family-names: Decker
+  given-names: Josua
+  affiliation: Department of Diagnostic and Interventional Radiology and Neuroradiology, University Hospital
+    Augsburg
+- family-names: Kröncke
+  given-names: Thomas
+  affiliation: Department of Diagnostic and Interventional Radiology and Neuroradiology, University Hospital
+    Augsburg
+- family-names: Haubold
+  given-names: Johannes
+  affiliation: Institute of Diagnostic and Interventional Radiology and Neuroradiology, University Hospital
+    Essen
+- family-names: Ringhof
+  given-names: Steffen
+  affiliation: Department of Diagnostic and Interventional Radiology, Medical Center – University of Freiburg,
+    Faculty of Medicine
+- family-names: Bamberg
+  given-names: Fabian
+  affiliation: Department of Diagnostic and Interventional Radiology, Medical Center – University of Freiburg,
+    Faculty of Medicine
+- family-names: Schmidt
+  given-names: Carsten Oliver
+  affiliation: Institute for Community Medicine, Department SHIP-KEF, University Medicine Greifswald
+- family-names: Wielpütz
+  given-names: Mark
+  affiliation: Institute of Diagnostic Radiology and Neuroradiology, University Medicine Greifswald
+- family-names: Leitzmann
+  given-names: Michael
+  affiliation: Department of Epidemiology and Preventive Medicine, University of Regensburg
+- family-names: Willich
+  given-names: Stefan N.
+  affiliation: Institute of Social Medicine, Epidemiology and Health Economics, Charité - University Medical
+    Center Berlin
+- family-names: Keil
+  given-names: Thomas
+  orcid: https://orcid.org/0000-0002-9108-3360
+  affiliation: Institute of Social Medicine, Epidemiology and Health Economics, Charité - University Medical
+    Center Berlin; Institute of Clinical Epidemiology and Biometry, University of Würzburg; State Institute
+    of Health I, Bavarian Health and Food Safety Authority
+- family-names: Niendorf
+  given-names: Thoralf
+  affiliation: Berlin Ultrahigh Field Facility (B.U.F.F.), Max Delbrück Center for Molecular Medicine
+    in the Helmholtz Association (MDC)
+- family-names: Pischon
+  given-names: Tobias
+  affiliation: Molecular Epidemiology Research Group, Max Delbrück Center for Molecular Medicine in the
+    Helmholtz Association (MDC)
+- family-names: Schlett
+  given-names: Christopher
+  affiliation: Department of Diagnostic and Interventional Radiology, Medical Center – University of Freiburg,
+    Faculty of Medicine; Department of Radiology, University Heart Center Freiburg – Bad Krozingen
+- family-names: Möller
+  given-names: Hendrik
+  affiliation: Department of Diagnostic and Interventional Neuroradiology, School of Medicine and Health,
+    Technical University of Munich University Hospital; Chair for AI in Healthcare and Medicine, School
+    of Computation, Information and Technology, Technical University of Munich (TUM)
