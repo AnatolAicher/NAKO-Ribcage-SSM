@@ -30,7 +30,7 @@ def _strip_format_suffix(p: Path) -> Path:
     return p.with_suffix("") if p.suffix in {".png", ".svg", ".pdf", ".html"} else p
 
 
-# ── PC deformation modes — dual-render (Plotly Mesh3d + PyVista print) ──────
+# ── PC deformation modes – dual-render (Plotly Mesh3d + PyVista print) ──────
 
 def _build_pc_deformation_figure(
     mean_shape: np.ndarray,
@@ -125,7 +125,7 @@ def _mpl_pc_deformations_renderer(
     and writes a single composite PNG. Headless-safe: no PyVista / VTK
     rendering, so it runs in any container without OSMesa / EGL / X.
     """
-    import matplotlib.pyplot as plt  # local — lazy
+    import matplotlib.pyplot as plt  # local – lazy
     from utils.mesh_mpl import add_mesh, set_cube_bounds, style_axis
 
     def _render(path: Path) -> None:
@@ -161,12 +161,12 @@ def _mpl_pc_deformations_renderer(
                     ax,
                     f"PC{k+1}  {'+' if sign > 0 else '−'}{n_sd:.0f} SD  ({evr:.1%})",
                 ))
-        fig.suptitle("Surface SSM — leading PC deformations",
+        fig.suptitle("Surface SSM – leading PC deformations",
                      fontsize=S.FONT_SIZE_TITLE_PT + 3, y=0.99)
         # Reserve 3 % at the top for the suptitle so it lives inside the
         # figure frame instead of floating outside.
         fig.tight_layout(rect=[0.0, 0.0, 1.0, 0.97], h_pad=0.4, w_pad=0.4)
-        # Per-panel labels at figure coords ABOVE each subplot — ax.set_title
+        # Per-panel labels at figure coords ABOVE each subplot – ax.set_title
         # on a 3D axes can render inside the cube volume and become illegible.
         for ax, label in ax_label_pairs:
             bbox = ax.get_position()
@@ -192,7 +192,7 @@ def _mpl_mean_shape_gallery_renderer(
     rib_colours: list[str],
 ) -> callable:
     """Return a closure that renders the per-rib mean-shape gallery via matplotlib."""
-    import matplotlib.pyplot as plt  # local — lazy
+    import matplotlib.pyplot as plt  # local – lazy
     from utils.mesh_mpl import add_mesh, set_cube_bounds, style_axis
 
     def _render(path: Path) -> None:
@@ -218,7 +218,7 @@ def _mpl_mean_shape_gallery_renderer(
                 set_cube_bounds(ax, [verts])
             style_axis(ax)
             ax.set_title(rib_ids[ri], fontsize=S.FONT_SIZE_TITLE_PT)
-        fig.suptitle(f"GPA mean shape — per-rib gallery ({n_ribs} ribs)",
+        fig.suptitle(f"GPA mean shape – per-rib gallery ({n_ribs} ribs)",
                      fontsize=S.FONT_SIZE_TITLE_PT + 1)
         fig.tight_layout()
         fig.savefig(path, dpi=S.EXPORT_RASTER_DPI)
@@ -273,7 +273,7 @@ def plot_pc_deformations(
 
     Plotly Mesh3d HTML for interactive exploration (one composite figure
     with ``n_pcs × 2`` panels) plus a static raster mosaic for print.
-    Writes ``<out_stem>.{html,png}`` directly — no subdirectory.
+    Writes ``<out_stem>.{html,png}`` directly – no subdirectory.
     """
     out_stem = Path(out_stem)
     out_stem.parent.mkdir(parents=True, exist_ok=True)
@@ -285,7 +285,7 @@ def plot_pc_deformations(
         # 85 mm/PC: each row matches the half-width of one of the two columns,
         # so panels are roughly square at full figure width.
         height_mm=max(85.0 * n_pcs_actual, 80.0),
-        title=f"Surface SSM — leading {n_pcs_actual} PC deformation modes",
+        title=f"Surface SSM – leading {n_pcs_actual} PC deformation modes",
     )
     # Detail moves under the title as an annotation so the title itself fits
     # on a single line at the chart's full width.
@@ -368,7 +368,7 @@ def plot_mean_shape_gallery(
     # Assign each face to a rib by looking up its first vertex's index in
     # the offsets table.  ``np.searchsorted(offsets[1:], v, side='right')``
     # returns the rib k such that ``offsets[k] <= v < offsets[k+1]``.  We
-    # then verify all three vertices land in the same rib — if a face
+    # then verify all three vertices land in the same rib – if a face
     # straddles a rib boundary it is logged as `cross-rib` and dropped.
     # This is more robust than the naive ``min ≥ s & max < e`` test,
     # which silently drops a whole rib's faces if any single index in
@@ -388,7 +388,7 @@ def plot_mean_shape_gallery(
         )
     face_rib = np.where(same_rib, v0_rib, -1)
 
-    # Per-rib diagnostic — prints face / vertex counts so empty ribs are
+    # Per-rib diagnostic – prints face / vertex counts so empty ribs are
     # visible.  Saved alongside the gallery for later inspection.
     diag_rows = []
     for ri in range(n_ribs):
@@ -446,10 +446,10 @@ def plot_mean_shape_gallery(
     apply_layout(
         fig, width_class="full",
         height_mm=max(40.0 * nrows, 80.0),
-        title=f"GPA mean shape — per-rib gallery ({n_ribs} ribs)",
+        title=f"GPA mean shape – per-rib gallery ({n_ribs} ribs)",
     )
     save_fig(fig, out_stem,
-             title="GPA mean shape — per-rib gallery",
+             title="GPA mean shape – per-rib gallery",
              width_class="full",
              formats=("html", "png"),
              static_renderer=_static_3d_renderer(

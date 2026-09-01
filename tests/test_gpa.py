@@ -1,4 +1,4 @@
-"""Tests for ``ssm.gpa`` — Generalised Procrustes Analysis."""
+"""Tests for ``ssm.gpa`` – Generalised Procrustes Analysis."""
 from __future__ import annotations
 
 import numpy as np
@@ -43,7 +43,7 @@ def test_align_to_target_corrects_reflection():
     aligned = align_to_target(source, target)
     # The optimal proper-rotation alignment cannot fully recover a
     # reflection, but the Kabsch trick must keep the rotation proper
-    # (det = +1) — ascertain the resulting alignment is no worse than
+    # (det = +1) – ascertain the resulting alignment is no worse than
     # leaving the reflected source untouched.
     assert np.linalg.norm(aligned - target) <= np.linalg.norm(source - target) + 1e-9
 

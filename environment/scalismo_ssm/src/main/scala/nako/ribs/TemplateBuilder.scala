@@ -25,7 +25,7 @@ object TemplateBuilder:
    * For each of the 24 rib identities, compute pairwise ``avgDistance`` on
    * the subsample.  Each patient accumulates a normalised centrality score
    * across all rib identities.  The patient with the lowest aggregate score
-   * is chosen — guaranteeing the template is consistently central, not just
+   * is chosen – guaranteeing the template is consistently central, not just
    * for a few rib levels.
    *
    * Patients with incomplete rib sets (< 24 STLs) are excluded.
@@ -92,7 +92,7 @@ object TemplateBuilder:
       }
 
       if meshes.length < 2 then
-        println(s"[Template]   $ribId: only ${meshes.length} mesh(es) — skipping")
+        println(s"[Template]   $ribId: only ${meshes.length} mesh(es) – skipping")
       else
         val n = meshes.length
         val scores = Array.fill(n)(0.0)

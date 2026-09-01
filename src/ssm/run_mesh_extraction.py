@@ -23,7 +23,7 @@ Also writes to the same extraction directory:
                                              voxel volume, aggregated per rib
   - ``patient_ids.txt``                      patient IDs processed (same as input)
   - ``template_id.txt``                      heuristic default (first patient
-                                             with all 24 ribs) — read
+                                             with all 24 ribs) – read
                                              interactively by the
                                              ``template_selection`` notebook.
                                              The *load-bearing* per-registration
@@ -34,7 +34,7 @@ Also writes to the same extraction directory:
 
 These extraction-level artifacts live alongside the per-rib STLs they
 describe; downstream registration reads them as inputs.  This dir is a
-deterministic, shared cache — repeated pipeline runs reuse the extracted
+deterministic, shared cache – repeated pipeline runs reuse the extracted
 STLs across runs.  Repository ``results/`` holds per-run analysis
 artifacts (one timestamped subdir per ``run_pipeline.py`` invocation).
 """
@@ -85,7 +85,7 @@ def parse_args() -> argparse.Namespace:
         help=f"Quadric decimation target per rib. Default: "
              f"{MESH_TARGET_FACES_PER_RIB} (settings.MESH_TARGET_FACES_PER_RIB). "
              f"Note: cached STLs in the output dir are reused regardless of "
-             f"this value — clear the dir or point --stl-dir at a fresh "
+             f"this value – clear the dir or point --stl-dir at a fresh "
              f"location to force re-extraction at a new face count.",
     )
     p.add_argument(
@@ -111,7 +111,7 @@ def _report_volumes(audit_rows: list[dict], stl_dir: Path) -> None:
     ]
     vdf = pd.DataFrame(recs).dropna(subset=["vol_pct"])
     if vdf.empty:
-        logger.warning("No mesh volumes recorded — volume summary skipped")
+        logger.warning("No mesh volumes recorded – volume summary skipped")
         return
 
     summary = (
@@ -152,7 +152,7 @@ def main() -> None:
         if args.n_patients is None or len(cached) >= args.n_patients:
             pids_cached = cached
             logger.info(
-                f"Using local patient ID cache ({len(cached):,} IDs) — skipping parquet read"
+                f"Using local patient ID cache ({len(cached):,} IDs) – skipping parquet read"
             )
 
     if pids_cached is not None:
@@ -167,7 +167,7 @@ def main() -> None:
                 if attempt == 5:
                     raise
                 logger.warning(
-                    f"Parquet read failed (attempt {attempt}/5): {exc} — retrying in 10s"
+                    f"Parquet read failed (attempt {attempt}/5): {exc} – retrying in 10s"
                 )
                 time.sleep(10)
         patient_ids = sorted(df["patient_id"].unique().tolist())

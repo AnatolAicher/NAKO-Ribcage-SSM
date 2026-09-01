@@ -5,9 +5,9 @@ Algorithm (per rib, per side):
 1. **P** = rib voxel with the smallest Euclidean distance to the paired
    vertebra mask. Sits on the rib surface near the costovertebral end.
 2. Greedy gradient-ascent on the rib mask's Euclidean distance transform
-   from **P** until a local maximum — pulls **P** off the surface to a
+   from **P** until a local maximum – pulls **P** off the surface to a
    medial-axis voxel.
-3. Geodesic distance field from **P** through the rib volume — Dijkstra
+3. Geodesic distance field from **P** through the rib volume – Dijkstra
    with unit cost inside the mask and anisotropic Euclidean step lengths
    (via ``skimage.graph.MCP_Geometric``).
 4. **Q** = voxel of maximum geodesic distance (distal / anterior end).
@@ -17,8 +17,8 @@ Algorithm (per rib, per side):
    (``(ijk + bbox_offset) * zooms``) and arc-length-parameterized cubic
    B-spline resample to a fixed number of landmarks.
 
-Outputs live in the **mesh frame** — ``voxel_idx_RAS * zooms`` with no
-affine translation — matching the STL meshes from ``ssm.mesh_extraction``
+Outputs live in the **mesh frame** – ``voxel_idx_RAS * zooms`` with no
+affine translation – matching the STL meshes from ``ssm.mesh_extraction``
 (``skimage.measure.marching_cubes(..., spacing=zooms)``). The Scala
 registration code reads landmarks in this frame; see
 ``environment/scalismo_ssm/.../RibRegistration.scala`` ("raw mesh frame").
@@ -282,7 +282,7 @@ def extract_centerline_from_nifti(
         ``resolve_ambiguous_sides``).
     vert_mask
         Binary mask of the paired vertebra (``data == rib_label - 32``).
-        May be empty — the seed-finder then falls back to the most posterior
+        May be empty – the seed-finder then falls back to the most posterior
         rib voxel.
     zooms
         3-vector of physical voxel spacings in mm (from the NIfTI header,
@@ -296,13 +296,13 @@ def extract_centerline_from_nifti(
     dict or None
         ``None`` if the rib mask is empty. Otherwise:
 
-        - ``points_mesh_frame``: ``(n_points, 3)`` float — resampled centerline.
-        - ``raw_path_mesh_frame``: ``(K, 3)`` float — voxel-stepwise path,
+        - ``points_mesh_frame``: ``(n_points, 3)`` float – resampled centerline.
+        - ``raw_path_mesh_frame``: ``(K, 3)`` float – voxel-stepwise path,
           pre-smoothing, in mesh-frame mm.
-        - ``A_ijk``: ``(3,)`` int — proximal anchor in uncropped voxel coords.
-        - ``B_ijk``: ``(3,)`` int — distal anchor in uncropped voxel coords.
-        - ``C_ijk``: ``(3,)`` int — vertebra-closest reference voxel.
-        - ``arc_length_mm``: float — arc length of the resampled polyline.
+        - ``A_ijk``: ``(3,)`` int – proximal anchor in uncropped voxel coords.
+        - ``B_ijk``: ``(3,)`` int – distal anchor in uncropped voxel coords.
+        - ``C_ijk``: ``(3,)`` int – vertebra-closest reference voxel.
+        - ``arc_length_mm``: float – arc length of the resampled polyline.
 
     Raises on geodesic disconnection or other algorithm failure so the
     caller can log + skip the rib.
@@ -457,7 +457,7 @@ def write_centerline_record(
         }
 
     ``frame: "RAS_mesh"`` signals points are ``voxel_idx_RAS * zooms`` with
-    no NIfTI affine translation — same frame as the per-rib STL meshes.
+    no NIfTI affine translation – same frame as the per-rib STL meshes.
     """
     pts = np.asarray(points, dtype=np.float64)
     raw = np.asarray(raw_points, dtype=np.float64)

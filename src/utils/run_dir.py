@@ -35,7 +35,7 @@ def patient_stl_dir(root: Path | str, pid: int | str) -> Path:
 
 
 def _utc_timestamp() -> str:
-    """Return the current UTC time as ``YYYYmmddTHHMMSSZ`` — filename-safe."""
+    """Return the current UTC time as ``YYYYmmddTHHMMSSZ`` – filename-safe."""
     return datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
 
 
@@ -97,8 +97,8 @@ def read_run_dir(
     """Resolve the run directory for ``<root>/<name>/results/``.
 
     Resolution order:
-      1. ``override`` — explicit path; if given, must exist.
-      2. ``<root>/<name>/results/<name>_latest`` — the symlink updated by
+      1. ``override`` – explicit path; if given, must exist.
+      2. ``<root>/<name>/results/<name>_latest`` – the symlink updated by
          :func:`make_run_dir`.
       3. ``FileNotFoundError`` with a clear message if neither resolves.
     """

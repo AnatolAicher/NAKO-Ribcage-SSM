@@ -2,7 +2,7 @@
 
 Bridges :mod:`utils.colors` (matplotlib-based ``PALETTE``) to Altair
 ``Scale`` objects, and exposes ``width_for(class_)`` so charts honour the
-project's print widths (170/85/56 mm). Deliberately thin — no font /
+project's print widths (170/85/56 mm). Deliberately thin – no font /
 layout / template registration.
 
 Public API::
@@ -329,7 +329,7 @@ def fdr_masked_heatmap(
 
     Cells with ``q >= fdr_threshold`` (or NaN q) are drawn as empty white cells
     with a faint border rather than dropped, so the full row × col grid stays
-    visible even when an entire row/column — or the whole plot — is
+    visible even when an entire row/column – or the whole plot – is
     non-significant (a background rect layer over every cell pins the axes).
     ``diverging=True`` (default) uses :func:`correlation_scale` symmetric at
     zero; ``diverging=False`` uses :func:`continuous_scale(sequential_var)``
@@ -393,7 +393,7 @@ def fdr_masked_heatmap(
                alt.Tooltip("value:Q", title=value_label, format=".3g"),
                alt.Tooltip("q:Q", title="q", format=".2g")]
 
-    # Background grid: a white cell with a faint border for every (row, col) —
+    # Background grid: a white cell with a faint border for every (row, col) –
     # keeps masked/missing cells visible and pins the axis domains.
     bg = alt.Chart(df_all).mark_rect(
         fill="white", stroke="#d9d9d9", strokeWidth=0.5,
@@ -412,7 +412,7 @@ def fdr_masked_heatmap(
         )
         layers.append(heat)
         if annotate and not df_sig["text"].eq("").all():
-            # Diverging scales saturate at ±vmax, sequential at vmax — same test
+            # Diverging scales saturate at ±vmax, sequential at vmax – same test
             # for both: |value|/vmax > threshold ⇒ dark fill ⇒ flip text to white.
             dark_expr = f"abs(datum.value) > {vmax * contrast_threshold}"
             layers.append(alt.Chart(df_sig).mark_text(baseline="middle").encode(

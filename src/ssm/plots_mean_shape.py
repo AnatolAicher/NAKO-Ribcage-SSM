@@ -235,7 +235,7 @@ def plot_mean_shape_views(
         stem=str(out_stem),
         formats=["png"],
         files={"png": str(raster_path)},
-        title="Mean ribcage — three orthogonal views",
+        title="Mean ribcage – three orthogonal views",
         width_class="full",
     ))
     logger.info("Saved mean-shape views → %s", raster_path)

@@ -5,7 +5,7 @@ the Altair spec contains O(bins²) rows instead of O(N). Keeps vl-convert's
 V8 heap small for large cohorts and removes per-patient data from the
 public-facing JSON spec.
 
-Pure pandas/numpy — no Altair import; the module is altair-only by
+Pure pandas/numpy – no Altair import; the module is altair-only by
 convention (lives next to ``altair_theme`` / ``figure_export_altair``).
 """
 from __future__ import annotations

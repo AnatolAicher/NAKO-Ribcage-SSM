@@ -53,6 +53,6 @@ def read_parquet(path: Path | str, **kwargs) -> pd.DataFrame:
                     f"Failed to copy {path} from network mount to local temp file. "
                     f"Check that the mount is accessible: {exc}"
                 ) from exc
-            logger.info(f"  Copied — reading parquet from {tmp.name}")
+            logger.info(f"  Copied – reading parquet from {tmp.name}")
             return pd.read_parquet(tmp.name, **kwargs)
     return pd.read_parquet(path, **kwargs)

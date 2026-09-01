@@ -2,9 +2,9 @@
 
 The 12 anatomical ribs are encoded two different ways in this project:
 
-- Segmentation labels **40–51** (NIfTI mask integer values) — used by
+- Segmentation labels **40–51** (NIfTI mask integer values) – used by
   the SSM track (mesh extraction, registration, PCA, residuals).
-- Vertebral levels **8–19** (T8–T19) — used by the data ingestion /
+- Vertebral levels **8–19** (T8–T19) – used by the data ingestion /
   bivariate / adjusted analyses.
 
 Both encode anatomical ribs **1–12** (seg 40 = vert T8 = rib 1; seg 51 =
@@ -16,11 +16,11 @@ the helpers below.
 
 Three string forms are produced by this module:
 
-- **internal token**  ``rib40_L``   — file paths, npz / dict keys
+- **internal token**  ``rib40_L``   – file paths, npz / dict keys
                                        (this module does not produce
                                        these, callers keep them).
-- **cli token**       ``rib7_R``    — CLI args, output filenames.
-- **display**         ``Rib 7 R``   — plot titles, hovers, logs.
+- **cli token**       ``rib7_R``    – CLI args, output filenames.
+- **display**         ``Rib 7 R``   – plot titles, hovers, logs.
 """
 from __future__ import annotations
 
@@ -82,7 +82,7 @@ def display_from_vert(vert_level: int, side: str | None = None,
 
 
 def cli_token_from_seg(seg_label: int, side: str) -> str:
-    """``(40, 'L') → 'rib1_L'``  — 1-based, no spaces, parseable."""
+    """``(40, 'L') → 'rib1_L'``  – 1-based, no spaces, parseable."""
     return f"rib{seg_to_anatomical(seg_label)}_{_SIDE_SHORT[side]}"
 
 
@@ -94,7 +94,7 @@ def parse_cli_token(s: str) -> tuple[int, str]:
 
     Raises ``ValueError`` on the old 40-based form or any other shape so
     the caller can produce a clean error.  ``'rib46_R'`` is rejected
-    even though it parses as an integer — the rib number must be in
+    even though it parses as an integer – the rib number must be in
     [1, 12].
     """
     m = _CLI_TOKEN_RE.match(s.strip())
@@ -106,7 +106,7 @@ def parse_cli_token(s: str) -> tuple[int, str]:
     if not (_RIB_MIN <= rib <= _RIB_MAX):
         raise ValueError(
             f"--rib-id={s!r}: rib number must be in 1..12 "
-            f"(N.B. internal NIfTI labels run 40..51 — use the anatomical form)"
+            f"(N.B. internal NIfTI labels run 40..51 – use the anatomical form)"
         )
     side = m.group(2)
     return anatomical_to_seg(rib), side

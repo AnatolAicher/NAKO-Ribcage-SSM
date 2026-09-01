@@ -4,8 +4,8 @@ Builds ``viewer_surface.html`` with the PCA model and regression coefficients
 embedded as JSON; reconstruction runs client-side. The page hosts both modes
 via in-app tabs:
 
-  - **PC explorer**       — slide leading PC scores.
-  - **Metadata explorer** — slide cohort metadata (age / height / weight /
+  - **PC explorer**       – slide leading PC scores.
+  - **Metadata explorer** – slide cohort metadata (age / height / weight /
                             BMI / body fat / pack-years); regression
                             coefficients map slider deltas to PC-score updates.
 
@@ -24,9 +24,9 @@ Metadata explorer::
 
 Two HTML files are written side-by-side:
 
-  - ``viewer_surface_internal.html`` — full payload (patient IDs + per-patient
+  - ``viewer_surface_internal.html`` – full payload (patient IDs + per-patient
     metadata embedded as JSON); carries a red "INTERNAL ONLY" banner.
-  - ``viewer_surface_public.html``   — no PIDs, no per-individual metadata
+  - ``viewer_surface_public.html``   – no PIDs, no per-individual metadata
     combinations anywhere in the source (neither visually nor in the JSON /
     JS); safe to share alongside the manuscript.
 
@@ -194,7 +194,7 @@ _INTERNAL_BANNER_HTML = (
 _INTERNAL_OVERLAY_BAR_INNER = """\
     <span class="ob-label">Compare to real patient:</span>
     <input id="patient-select" type="text" list="patient-list"
-           placeholder="Patient ID — type or pick"
+           placeholder="Patient ID – type or pick"
            autocomplete="off" spellcheck="false"
            style="font-size:12px;padding:3px 6px;border-radius:4px;border:1px solid #ccc;font-family:inherit;color:#333;background:#fff;min-width:140px"
            oninput="onPatientInput(this.value)">
@@ -477,7 +477,7 @@ function gaussRand() {
   return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
 }
 
-// PC-mode summary only — the public viewer never surfaces per-patient
+// PC-mode summary only – the public viewer never surfaces per-patient
 // metadata combinations.
 function updateOverlayInfo() {
   const el = document.getElementById('overlay-info');
@@ -574,7 +574,7 @@ _HTML_TEMPLATE = """\
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rib Cage Surface SSM — Interactive Viewer</title>
+<title>Rib Cage Surface SSM – Interactive Viewer</title>
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1050,10 +1050,10 @@ function updateOodBanner() {
   const severe = d2 >= M.ood_severe_d2;
   el.className = severe ? 'ood-severe' : 'ood-warn';
   el.textContent = severe
-    ? `Extrapolating beyond the study population — this combination is `
+    ? `Extrapolating beyond the study population – this combination is `
       + `outside ~99% of the cohort (Mahalanobis d² = ${d2.toFixed(1)}, `
       + `99th-percentile cohort d² = ${M.ood_severe_d2.toFixed(1)}).`
-    : `Uncommon combination — rarer than ~95% of the cohort `
+    : `Uncommon combination – rarer than ~95% of the cohort `
       + `(Mahalanobis d² = ${d2.toFixed(1)}, 95th-percentile cohort `
       + `d² = ${M.ood_warn_d2.toFixed(1)}).`;
   el.style.display = '';
@@ -1149,7 +1149,7 @@ def export_html(
     anywhere in the HTML (neither visually nor in the JSON / JS source), and
     the patient-picker / load-metadata UI is removed entirely. The "Find
     similar patient" feature still works in public mode (it operates on
-    ``patient_pc_scores`` and ``patient_sex`` by index alone — both allowed
+    ``patient_pc_scores`` and ``patient_sex`` by index alone – both allowed
     under the single-metadata × derivative rule).
     """
     components, ev, evr, mean_vec, mean_shape, faces, scores, beta = \
@@ -1271,7 +1271,7 @@ def export_html(
     warn_msg = ""
     if n_patients < 30:
         warn_msg = (
-            f"Only {n_patients} patients in current dataset — regression "
+            f"Only {n_patients} patients in current dataset – regression "
             f"coefficients are unreliable. Re-run with full cohort for "
             f"meaningful metadata-driven deformations."
         )
@@ -1281,7 +1281,7 @@ def export_html(
     # [q_lo, q_hi] range, but the user can still produce *combinations*
     # the cohort never contains (e.g. tall + light + high body fat).
     # Mahalanobis distance against the cohort joint distribution; JS flags
-    # implausible slider configurations. BMI is excluded — it's algebraic in
+    # implausible slider configurations. BMI is excluded – it's algebraic in
     # height + weight, which would make Σ rank-deficient.
     ood_preds = [p for p in available if p != "bmi"]
     if len(ood_preds) >= 2:
@@ -1350,7 +1350,7 @@ def export_html(
         "z": [float(lo[2]), float(hi[2])],
     }
     # Colorbar range: peak per-vertex Euclidean displacement (mm) under any
-    # *single* slider pushed to its extreme — narrower than the worst-case
+    # *single* slider pushed to its extreme – narrower than the worst-case
     # sign-aligned hypercube corner used for scene_range, so single-slider
     # exploration uses the full colorscale.
     comp_norms = np.linalg.norm(comps_xyz, axis=2)                     # (K, n_pts)
@@ -1454,9 +1454,9 @@ def export_html(
         "ood_warn_d2":       ood_warn_d2,
         "ood_severe_d2":     ood_severe_d2,
         "warn_msg":          warn_msg,
-        # ── Theme — from settings.FONT_FAMILY + utils.colors.PALETTE ───────
+        # ── Theme – from settings.FONT_FAMILY + utils.colors.PALETTE ───────
         "font_family":            FONT_FAMILY,
-        # Sequential plasma ("displacement") — non-negative.
+        # Sequential plasma ("displacement") – non-negative.
         "displacement_colorscale": _colors.colorscale("displacement"),
         # Neutral overlay colour for the real-patient ghost mesh.
         "ghost_color":             "#5a6470",

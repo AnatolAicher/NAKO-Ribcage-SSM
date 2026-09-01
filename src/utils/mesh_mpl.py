@@ -120,7 +120,7 @@ def add_meshes(
     matplotlib's ``mpl_toolkits.mplot3d`` only depth-sorts faces *within* a
     single ``Poly3DCollection``; across collections it sorts by each
     collection's aggregate ``sort_zpos``, which breaks when the
-    collections interpenetrate (e.g. adjacent ribs in a rib cage —
+    collections interpenetrate (e.g. adjacent ribs in a rib cage –
     whichever was added later renders on top regardless of camera). Merging
     every mesh in one scene into one collection lets the per-face painter's
     sort cover the whole scene.

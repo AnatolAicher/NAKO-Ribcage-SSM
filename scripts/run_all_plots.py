@@ -218,7 +218,7 @@ def main() -> None:
     stls_reachable = bool(reg and ext and reg.is_dir() and ext.is_dir())
     if not stls_reachable:
         logger.warning(
-            "STL dirs from metadata.json are not reachable on this machine — "
+            "STL dirs from metadata.json are not reachable on this machine – "
             "3D STL-dependent renders and the residual diagnostics will be skipped."
         )
 

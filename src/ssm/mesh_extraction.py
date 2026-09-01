@@ -233,9 +233,9 @@ def extract_per_rib(
     Returns
     -------
     dict with keys:
-      ``meshes`` — dict mapping ``(label, side)`` → ``pv.PolyData``;
+      ``meshes`` – dict mapping ``(label, side)`` → ``pv.PolyData``;
                    ``side`` is ``"L"`` (left) or ``"R"`` (right).
-      ``audit``  — list of dicts, one per rib label, with component counts,
+      ``audit``  – list of dicts, one per rib label, with component counts,
                    voxel counts, centroid positions, per-side mesh volume
                    against the source voxel volume, and any warnings.
     """

@@ -12,7 +12,7 @@ def _low_rank_synthetic(
     """Generate ``(n, n_pts, 3)`` shapes lying on a ``true_rank``-dim affine
     subspace plus small isotropic noise.  Mode variances are spaced
     geometrically (3.0, 2.4, 1.92, …) so every mode contributes a
-    similar share of total variance — useful for tests that need PCA
+    similar share of total variance – useful for tests that need PCA
     to actually retain *all* ``true_rank`` modes."""
     rng = np.random.default_rng(seed)
     d = 3 * n_pts

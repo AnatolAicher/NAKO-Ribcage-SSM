@@ -86,7 +86,7 @@ def plot_regression_heatmap_surface(
     sorted_cols = sorted(z.columns, key=_pc_int)
     z = z[sorted_cols]; q = q[sorted_cols]
 
-    title_text = title or "Surface SSM — Adjusted PC regression (standardised β)"
+    title_text = title or "Surface SSM – Adjusted PC regression (standardised β)"
     subtitle = subtitle or (f"HC3-robust SE · FDR-masked at q ≥ {FDR_DISPLAY_ALPHA} (empty cells) · "
                             f"{STAR_LEGEND}")
     common = dict(
@@ -183,7 +183,7 @@ def plot_pc_loadings_per_rib(
     )
 
 
-# ── PC loadings per rib — mirrored-bar companion ─────────────────────────────
+# ── PC loadings per rib – mirrored-bar companion ─────────────────────────────
 
 def plot_pc_loadings_per_rib_histo(
     pca,
@@ -398,7 +398,7 @@ def plot_scree_surface(pca, out_stem: str | Path) -> None:
     # Two top-level layers ⇒ resolve_scale(y="independent") yields exactly two
     # y-scales (left: bar, right: line+points+thresholds), not five.
     right_side = alt.layer(cumulative_line, cumulative_pt, thresh_rule, thresh_text)
-    title_text = f"Surface SSM — PCA scree (K={k} components)"
+    title_text = f"Surface SSM – PCA scree (K={k} components)"
     chart = (alt.layer(bar, right_side)
              .resolve_scale(y="independent")
              .properties(width=width_for("full"),
@@ -443,7 +443,7 @@ def plot_pc_scores_pairs(
     with ``n < min_count`` are dropped (k-anonymity). The diagonal carries
     each PC's marginal KDE (peak-normalised, per group when categorical).
     For categorical ``color_by`` the legend is bound to a point selection
-    so HTML viewers can toggle groups on/off — both bubbles and KDE dim.
+    so HTML viewers can toggle groups on/off – both bubbles and KDE dim.
     """
     out_stem = _strip_format_suffix(Path(out_stem))
     pc_cols = sorted(
@@ -460,7 +460,7 @@ def plot_pc_scores_pairs(
     else:
         mode = "categorical"
 
-    # Off-diagonal bubble data — LOWER triangle. For each pair (px=smaller PC,
+    # Off-diagonal bubble data – LOWER triangle. For each pair (px=smaller PC,
     # py=larger PC) we place px on x and py on y so the lower triangle
     # (row > column) gets the bubbles; upper triangle stays empty.
     pieces: list[pd.DataFrame] = []
@@ -602,7 +602,7 @@ def plot_pc_scores_pairs(
     # Map the color_by key to a display label for the title.
     color_label = {"sex": "Sex", "smoking_status": "Smoking",
                    "smoking": "Smoking"}.get(color_by, color_by.title())
-    title_text  = title or f"PC score pair-plot — {color_label}"
+    title_text  = title or f"PC score pair-plot – {color_label}"
     subtitle    = f"(PC1..PC{len(pc_cols)})"
 
     chart = (
@@ -672,7 +672,7 @@ def plot_pc_scores_pairs_adjusted(
     label = {"sex": "Sex", "smoking_status": "Smoking"}.get(color_by, color_by.title())
     plot_pc_scores_pairs(
         resid, out_stem, n_pcs=n_pcs, color_by=color_by, bins=bins,
-        min_count=min_count, title=f"PC pair-plot, adjusted residuals — {label}",
+        min_count=min_count, title=f"PC pair-plot, adjusted residuals – {label}",
         arrow=arrow,
     )
 
@@ -707,7 +707,7 @@ def plot_pc_scores_pairs_targeted(
     label = {"sex": "Sex", "smoking_status": "Smoking"}.get(color_by, color_by.title())
     plot_pc_scores_pairs(
         resid, out_stem, n_pcs=n_pcs, color_by=color_by, bins=bins,
-        min_count=min_count, title=f"PC pair-plot, DAG-adjusted residuals — {label}",
+        min_count=min_count, title=f"PC pair-plot, DAG-adjusted residuals – {label}",
         arrow=arrow,
     )
 

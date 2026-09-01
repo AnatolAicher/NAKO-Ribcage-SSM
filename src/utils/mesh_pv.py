@@ -22,7 +22,7 @@ _PV_CONFIGURED: bool = False
 
 
 def _configure_pv() -> None:
-    """One-time theme setup — silences VTK warnings, disables notebook backend."""
+    """One-time theme setup – silences VTK warnings, disables notebook backend."""
     global _PV_CONFIGURED
     if _PV_CONFIGURED:
         return

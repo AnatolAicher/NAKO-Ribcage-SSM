@@ -1,7 +1,7 @@
 """Regression of PCA scores on patient metadata (three-model design).
 
-Three HC3-robust layers per PC: ``unadjusted`` (one marginal OLS per predictor —
-total association), ``adjusted`` (one multivariable OLS — partial coefficients +
+Three HC3-robust layers per PC: ``unadjusted`` (one marginal OLS per predictor –
+total association), ``adjusted`` (one multivariable OLS – partial coefficients +
 Frisch-Waugh-Lovell partial R²), and ``targeted`` (one OLS per exposure with its
 DAG-based back-door adjustment set). Sex is additionally summarised by Welch's
 t-test for the conventional Cohen's d. BH-FDR is applied within each layer.

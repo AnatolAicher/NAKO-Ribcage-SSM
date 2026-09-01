@@ -69,7 +69,7 @@ def audit_seg_components(
     Parameters
     ----------
     cfg :
-        Config dict — uses ``paths.nifti_base``, ``paths.nifti_vert_rib_pattern``,
+        Config dict – uses ``paths.nifti_base``, ``paths.nifti_vert_rib_pattern``,
         ``nifti.rib_level_labels``.
     patient_ids :
         Candidate patient IDs to audit (typically the ingestion-merged list).

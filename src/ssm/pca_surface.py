@@ -1,7 +1,7 @@
 """Load registered per-rib meshes, GPA-align, run PCA, build score DataFrame.
 
 Each patient has 24 STL files (one per rib identity, ``{pid}_rib{label}_{L|R}.stl``)
-sharing the same per-rib template topology — so GPA reduces to translation +
+sharing the same per-rib template topology – so GPA reduces to translation +
 rotation alignment without any resampling.
 """
 from __future__ import annotations
@@ -157,7 +157,7 @@ def load_registered_meshes_per_rib(
                 eta = (n_pids - i) / rate if rate > 0 else 0.0
                 logger.info(
                     f"    read {i:,}/{n_pids:,} patients "
-                    f"({i * 100 / n_pids:.1f}%) — "
+                    f"({i * 100 / n_pids:.1f}%) – "
                     f"{elapsed / 60:.1f}m elapsed, ETA {eta / 60:.1f}m"
                 )
                 last_log_t = now
@@ -182,7 +182,7 @@ def load_registered_meshes_per_rib(
             elif len(pts) != ref_n_pts[key]:
                 logger.warning(
                     f"PID {pid} rib{lab}_{side}: {len(pts)} pts "
-                    f"(expected {ref_n_pts[key]}) — skipping patient"
+                    f"(expected {ref_n_pts[key]}) – skipping patient"
                 )
                 complete = False
                 break
@@ -232,7 +232,7 @@ def run_gpa(shapes: np.ndarray) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     -------
     aligned     : ``(N, n_pts, 3)``.
     mean_shape  : ``(n_pts, 3)``.
-    rms_history : ``(n_iterations,)`` — relative mean-shape change at
+    rms_history : ``(n_iterations,)`` – relative mean-shape change at
                   each iteration (consumed by ``plot_gpa_convergence``).
     """
     aligned, mean_shape, rms_history = _gpa(shapes)
@@ -320,7 +320,7 @@ def build_surface_scores_df(
     Returns a DataFrame with ``patient_id``, ``PC_1`` … ``PC_K``, plus the
     available metadata columns.
     """
-    scores   = pca.transform(X_flat)                   # (N, K) — sklearn centers internally
+    scores   = pca.transform(X_flat)                   # (N, K) – sklearn centers internally
     pc_cols  = [f"PC_{i+1}" for i in range(scores.shape[1])]
     score_df = pd.DataFrame(scores, columns=pc_cols)
     score_df.insert(0, "patient_id", patient_ids)

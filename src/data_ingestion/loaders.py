@@ -42,7 +42,7 @@ SHAPE_FEATURES = [
 
 SCALAR_EXTRAS = [
     "rib_length",     # arc length in mm
-    "rib_volume",     # raw voxel count (excluded from analysis — use MeshVolume)
+    "rib_volume",     # raw voxel count (excluded from analysis – use MeshVolume)
     "sr",             # short-rib flag (bool)
     "seg_at_border",  # segmentation touches image border (bool)
     "split_start",
@@ -55,7 +55,7 @@ ALL_SHAPE_COLS = SHAPE_FEATURES + ["rib_length", "rib_volume"]
 # Subset used in the statistical analysis.
 # Excluded: original_shape_VoxelVolume (r ≈ 1.0 with MeshVolume); rib_volume.
 # Retained: both rib_length and original_shape_MajorAxisLength (arc length vs.
-# ellipsoid linear axis — different constructs).
+# ellipsoid linear axis – different constructs).
 ANALYSIS_SHAPE_COLS = [
     c for c in SHAPE_FEATURES if c != "original_shape_VoxelVolume"
 ] + ["rib_length"]
@@ -224,7 +224,7 @@ def load_json_analytics(
                 )
 
     if n_missing:
-        logger.info(f"  {n_missing:,} paths had no file (patient has no JSON — expected)")
+        logger.info(f"  {n_missing:,} paths had no file (patient has no JSON – expected)")
     if n_errors:
         logger.warning(f"  {n_errors:,} files failed to parse")
 

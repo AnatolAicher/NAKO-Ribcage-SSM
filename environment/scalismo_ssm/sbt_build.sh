@@ -30,7 +30,7 @@ if [[ "$SCRIPT_DIR" == *":"* ]]; then
             -exec rm -rf {} + 2>/dev/null || true
         cp -R "$SCRIPT_DIR/." "$BUILD_DIR/"
     fi
-    echo "[sbt_build] Colon in path detected — building from $BUILD_DIR"
+    echo "[sbt_build] Colon in path detected – building from $BUILD_DIR"
     cd "$BUILD_DIR"
 else
     cd "$SCRIPT_DIR"

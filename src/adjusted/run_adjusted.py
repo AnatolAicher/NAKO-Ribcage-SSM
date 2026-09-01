@@ -104,15 +104,15 @@ def main() -> None:
     plot_partial_r2_heatmap(adj, FIGS / "adj_heatmap_partial_r2")
     plot_forest_plots(adj, ANALYSIS_SHAPE_COLS, FIGS / "adj_forest_plots")
     plot_adj_heatmap(unadj, FIGS / "unadj_heatmap_beta",
-                     title="Unadjusted OLS — standardised β")
+                     title="Unadjusted OLS – standardised β")
     plot_adj_heatmap(targeted, FIGS / "targeted_heatmap_beta",
-                     title="DAG-based per-exposure OLS — standardised β")
+                     title="DAG-based per-exposure OLS – standardised β")
     plot_partial_r2_heatmap(targeted, FIGS / "targeted_heatmap_partial_r2",
-                            title="DAG-based per-exposure OLS — partial R²")
+                            title="DAG-based per-exposure OLS – partial R²")
 
     total = time.monotonic() - pipeline_t0
     m, s = divmod(total, 60)
-    logger.info(f"Adjusted analysis complete — total wall time {m:.0f}m{s:.0f}s")
+    logger.info(f"Adjusted analysis complete – total wall time {m:.0f}m{s:.0f}s")
     logger.info(f"  All results → {OUT}/")
 
 

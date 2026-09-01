@@ -129,7 +129,7 @@ def holdout_error(
     """K-fold per-vertex geometry-prediction error (mm) vs each patient's own reconstruction.
 
     Error is measured against the full-rank (all-PC) reconstruction of the
-    patient's true scores — the basis's best representation of their cage — so it
+    patient's true scores – the basis's best representation of their cage – so it
     isolates demographic-prediction error from the <1% basis-truncation residual.
     """
     df = add_design_columns(scores_df)

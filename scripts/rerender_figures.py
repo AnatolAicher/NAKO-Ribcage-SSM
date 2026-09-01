@@ -1,6 +1,6 @@
 """Re-emit every pipeline figure from a previous run dir into a 1:1 copy.
 
-Copies a source run dir (compute artifacts only — figures/ subtrees are
+Copies a source run dir (compute artifacts only – figures/ subtrees are
 omitted) to a fresh target and re-runs every figure-emitting code path
 against the cached parquet / npz / csv / json artifacts. The source is
 never modified.
@@ -110,26 +110,26 @@ def _replay_ingestion(run_dir: Path) -> None:
 
     clean_path = stage / "analytic_clean.parquet"
     if not clean_path.exists():
-        raise FileNotFoundError(f"{clean_path} missing — cannot replay ingestion figures.")
+        raise FileNotFoundError(f"{clean_path} missing – cannot replay ingestion figures.")
     included = read_parquet(clean_path)
 
     excl_path = stage / "exclusions.csv"
     if excl_path.exists():
         qm.plot_inclusion_flow(pd.read_csv(excl_path), figs / "inclusion_flow")
     else:
-        logger.warning(f"{excl_path} missing — skipping inclusion-flow figure.")
+        logger.warning(f"{excl_path} missing – skipping inclusion-flow figure.")
 
     miss_path = stage / "missingness_report.csv"
     if miss_path.exists():
         qm.plot_missingness(pd.read_csv(miss_path, index_col=0), figs / "missingness")
     else:
-        logger.warning(f"{miss_path} missing — skipping missingness figure.")
+        logger.warning(f"{miss_path} missing – skipping missingness figure.")
 
     norm_path = stage / "normality_tests.csv"
     if norm_path.exists():
         qm.plot_normality_summary(pd.read_csv(norm_path, index_col=0), figs / "normality")
     else:
-        logger.warning(f"{norm_path} missing — skipping normality summary.")
+        logger.warning(f"{norm_path} missing – skipping normality summary.")
 
     qm.plot_distributions(included, ANALYSIS_SHAPE_COLS, figs)
 
@@ -205,7 +205,7 @@ def _ensure_template_faces(
     template_id_path = registered_dir / "template_id.txt"
     if not template_id_path.exists():
         logger.warning(
-            f"{template_id_path} not found — skipping deformation + gallery plots."
+            f"{template_id_path} not found – skipping deformation + gallery plots."
         )
         return None
 
@@ -218,7 +218,7 @@ def _ensure_template_faces(
     for lab, side in RIB_ORDER:
         stl_path = tpid_pdir / f"{tpid}_rib{lab}_{side}.stl"
         if not stl_path.exists():
-            logger.warning(f"Template rib STL missing: {stl_path.name} — skipping.")
+            logger.warning(f"Template rib STL missing: {stl_path.name} – skipping.")
             return None
         try:
             tmpl = pv.read(str(stl_path))
@@ -250,7 +250,7 @@ def _replay_ssm_pca(
 
     pca_npz = stage / "pca_surface.npz"
     if not pca_npz.exists():
-        raise FileNotFoundError(f"{pca_npz} missing — cannot replay ssm_pca figures.")
+        raise FileNotFoundError(f"{pca_npz} missing – cannot replay ssm_pca figures.")
     pca = _rebuild_pca_shim(pca_npz)
 
     mean_shape  = np.load(stage / "mean_shape_surface.npy")
@@ -362,7 +362,7 @@ def _replay_radiomics_correlation(run_dir: Path) -> None:
     meta_path    = stage / "metadata.json"
     if not effects_path.exists() or not meta_path.exists():
         raise FileNotFoundError(
-            f"Missing {effects_path} or {meta_path} — cannot replay "
+            f"Missing {effects_path} or {meta_path} – cannot replay "
             f"radiomics_correlation figures."
         )
     effects = pd.read_csv(effects_path)
@@ -400,7 +400,7 @@ def _replay_ssm_qa_metrics(run_dir: Path) -> None:
     styner_path = stage / "eval_styner.json"
     if not styner_path.exists():
         raise FileNotFoundError(
-            f"{styner_path} missing — cannot replay Styner triad without "
+            f"{styner_path} missing – cannot replay Styner triad without "
             f"the cached compute output."
         )
     per_rib, whole_cage = load_styner_json(styner_path)
@@ -443,7 +443,7 @@ def _replay_ssm_qa_residuals(
             candidates = sorted(stage.glob("residuals_per_patient_*.npz"))
             if not candidates:
                 raise FileNotFoundError(
-                    f"No residuals_per_patient[*].npz under {stage} — "
+                    f"No residuals_per_patient[*].npz under {stage} – "
                     f"cannot replay residual figures."
                 )
             npz_path = candidates[0]
@@ -451,7 +451,7 @@ def _replay_ssm_qa_residuals(
             logger.info(f"Auto-detected rib-scope residuals: {npz_path.name}")
 
     if not npz_path.exists():
-        raise FileNotFoundError(f"{npz_path} missing — cannot replay residual figures.")
+        raise FileNotFoundError(f"{npz_path} missing – cannot replay residual figures.")
 
     per_patient, p95_by_pid, rib_ids = load_residuals_npz(npz_path)
     logger.info(
@@ -470,12 +470,12 @@ def _replay_ssm_qa_residuals(
 
     if extracted_dir is None or registered_dir is None:
         logger.warning(
-            "Extracted / registered STL dir unavailable — skipping worst-N "
+            "Extracted / registered STL dir unavailable – skipping worst-N "
             "mosaic (residual violins emitted above)."
         )
         return
 
-    # Reharvest PolyData only for the worst-N patients per direction — seconds.
+    # Reharvest PolyData only for the worst-N patients per direction – seconds.
     for direction in ("forward", "reverse"):
         ranked = sorted(per_patient.keys(),
                         key=lambda p, dr=direction: -p95_by_pid[dr][p])
@@ -485,13 +485,13 @@ def _replay_ssm_qa_residuals(
             harvested = _harvest_patient(pid, registered_dir, extracted_dir, rib_ids)
             if harvested is None:
                 logger.warning(
-                    f"Could not harvest STLs for pid={pid} — skipping mosaic panel."
+                    f"Could not harvest STLs for pid={pid} – skipping mosaic panel."
                 )
                 continue
             panels.append((pid, harvested, p95_by_pid[direction][pid]))
         if not panels:
             logger.warning(
-                f"No reharvestable patients for {direction} mosaic — skipping."
+                f"No reharvestable patients for {direction} mosaic – skipping."
             )
             continue
         out_png = figs / f"worst_patients_residuals_{direction}{suffix}"
@@ -521,7 +521,7 @@ def _replay_visualizations(
     parquet = stage_dir(run_dir, "ingestion") / "analytic_clean.parquet"
     if not parquet.exists():
         raise FileNotFoundError(
-            f"{parquet} missing — cannot replay supplemental visualisations."
+            f"{parquet} missing – cannot replay supplemental visualisations."
         )
     df = read_parquet(parquet)
 
@@ -700,7 +700,7 @@ def main() -> int:
     ran:     list[str] = []
     skipped: list[str] = []
     for stage_name in selected:
-        logger.info(f"=== STAGE {stage_name} — START ===")
+        logger.info(f"=== STAGE {stage_name} – START ===")
         t_stage = time.monotonic()
         try:
             if stage_name == "ingestion":
@@ -724,20 +724,20 @@ def main() -> int:
                 )
             elif stage_name == "visualizations":
                 _replay_visualizations(target, methodology_cfg)
-            else:  # pragma: no cover — guarded by selected validation above
+            else:  # pragma: no cover – guarded by selected validation above
                 raise ValueError(f"Unhandled stage: {stage_name}")
         except FileNotFoundError as exc:
-            logger.error(f"STAGE {stage_name} — FAILED: {exc}")
+            logger.error(f"STAGE {stage_name} – FAILED: {exc}")
             skipped.append(stage_name)
             continue
         dt = time.monotonic() - t_stage
-        logger.info(f"=== STAGE {stage_name} — DONE ({dt:.0f}s) ===\n")
+        logger.info(f"=== STAGE {stage_name} – DONE ({dt:.0f}s) ===\n")
         ran.append(stage_name)
 
     total = time.monotonic() - t0
     m, s = divmod(total, 60)
     logger.info("─" * 70)
-    logger.info(f"Rerender complete — {m:.0f}m{s:.0f}s")
+    logger.info(f"Rerender complete – {m:.0f}m{s:.0f}s")
     logger.info(f"  Ran:      {ran}")
     logger.info(f"  Skipped:  {skipped}")
     logger.info(f"  Target:   {target}")

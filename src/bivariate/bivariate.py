@@ -65,7 +65,7 @@ def run_welch_ttest(
         df_ws = (s1**2/n1 + s2**2/n2)**2 / (
             (s1**2/n1)**2/(n1-1) + (s2**2/n2)**2/(n2-1)
         )
-        # Cohen's d — root-mean-square SD denominator (Welch's t-test
+        # Cohen's d – root-mean-square SD denominator (Welch's t-test
         # already assumes unequal variances).
         denom = float(np.sqrt((s1**2 + s2**2) / 2))
         d = (float(np.mean(b)) - float(np.mean(a))) / denom if denom > 0 else np.nan

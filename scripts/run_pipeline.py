@@ -277,7 +277,7 @@ def _stage_mesh_extraction(
 
 
 def _stage_template(preset: Preset, reg_out_dir: Path, stl_per_rib: Path) -> None:
-    """Write template_id.txt — required by downstream PCA stage."""
+    """Write template_id.txt – required by downstream PCA stage."""
     target = reg_out_dir / "template_id.txt"
     if not stl_per_rib.exists():
         raise FileNotFoundError(
@@ -573,13 +573,13 @@ def main() -> int:
 
     def gate(name: str, fn) -> None:
         if preset.stages.get(name):
-            log.info(f"=== STAGE {name} — START ===")
+            log.info(f"=== STAGE {name} – START ===")
             log_stage_config(log, name, stage_settings.get(name, {}))
             fn()
-            log.info(f"=== STAGE {name} — DONE ===\n")
+            log.info(f"=== STAGE {name} – DONE ===\n")
             ran.append(name)
         else:
-            log.info(f"=== STAGE {name} — SKIPPED (disabled in preset) ===\n")
+            log.info(f"=== STAGE {name} – SKIPPED (disabled in preset) ===\n")
             skipped.append(name)
 
     gate("ingestion",       lambda: _stage_ingestion(preset, run_dir, workers_arg))
@@ -616,7 +616,7 @@ def main() -> int:
     elapsed = time.monotonic() - t0
     m, s = divmod(elapsed, 60)
     log.info("─" * 70)
-    log.info(f"Pipeline complete — {m:.0f}m{s:.0f}s")
+    log.info(f"Pipeline complete – {m:.0f}m{s:.0f}s")
     log.info(f"  Ran:      {ran}")
     log.info(f"  Skipped:  {skipped}")
     log.info(f"  Run dir:  {run_dir}")

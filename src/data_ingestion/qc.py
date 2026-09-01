@@ -160,7 +160,7 @@ def apply_exclusions(
     n_total  = len(excl_df)
 
     logger.info(
-        f"Exclusions — rib count: {n_rib}, missing metadata: {n_meta}, "
+        f"Exclusions – rib count: {n_rib}, missing metadata: {n_meta}, "
         f"seg components: {n_comp}, seg_at_border: {n_border}, split: {n_split} | "
         f"total: {n_excl}/{n_total} ({100 * n_excl / n_total:.1f}%)"
     )
@@ -274,7 +274,7 @@ def compute_table1(
     def _row(variable, overall_str, group_strs, p_val, note=""):
         r = {"Variable": variable, "Overall": overall_str}
         r.update(group_strs)
-        r["p-value"] = f"{p_val:.3f}" if p_val is not None else "—"
+        r["p-value"] = f"{p_val:.3f}" if p_val is not None else "–"
         r["Note"] = note
         return r
 

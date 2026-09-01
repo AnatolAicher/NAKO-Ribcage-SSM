@@ -152,7 +152,7 @@ def main() -> None:
             pd.DataFrame(columns=["patient_id", "rib_label", "n_components"]).to_csv(
                 anomalies_path, index=False
             )
-            logger.info(f"  No anomalies — empty summary written to {anomalies_path}")
+            logger.info(f"  No anomalies – empty summary written to {anomalies_path}")
         else:
             anomalies.to_csv(anomalies_path, index=False)
             logger.info(
@@ -239,7 +239,7 @@ def main() -> None:
         )
 
     elapsed = time.perf_counter() - t_pipeline
-    logger.info(f"Ingestion pipeline complete — total {elapsed:.1f}s")
+    logger.info(f"Ingestion pipeline complete – total {elapsed:.1f}s")
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-# Data path configuration — template.
+# Data path configuration – template.
 # Copy to data_config.yaml (gitignored) and fill in the paths for your system.
 
 paths:
@@ -17,7 +17,7 @@ paths:
   nifti_base: "/path/to/derivatives_inference_proc_RIB_HE_508"
   nifti_vert_rib_pattern: "{base}/{block}/{patient_id}/vibe/sub-{patient_id}_sequ-stitched_acq-ax_mod-vibe_seg-vert-rib_msk.nii.gz"
 
-  # Raw VIBE MRI volumes — used only by the one-patient methodology figure
+  # Raw VIBE MRI volumes – used only by the one-patient methodology figure
   # rendered in the visualisations stage. Optional: leave unset if the figure
   # is not wired in any preset's methodology_figure block.
   mri_nifti_base: "/path/to/derivatives_inference_proc_RIB_HE_508"
@@ -30,7 +30,7 @@ paths:
 nifti:
   rib_level_labels: [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
 
-# Exclusion criteria — applied during ingestion (documented in
+# Exclusion criteria – applied during ingestion (documented in
 # <run-dir>/ingestion/exclusions.csv).
 exclusion_criteria:
   rib_count:

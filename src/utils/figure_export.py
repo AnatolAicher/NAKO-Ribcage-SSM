@@ -125,7 +125,7 @@ def save_fig(
                     ok = out.exists() and out.stat().st_size > 0
                 except Exception as exc:  # third-party renderers vary
                     logger.warning(
-                        "Static renderer failed for %s (%s) — falling back to Plotly export.",
+                        "Static renderer failed for %s (%s) – falling back to Plotly export.",
                         out.name, exc,
                     )
             if not ok:
@@ -170,7 +170,7 @@ def _write_html(fig: go.Figure, out: Path) -> None:
         ),
     )
     # Portrait layouts (multi-row 3D mosaics) would otherwise be squashed to
-    # viewport height — pin body height to viewport width × layout aspect so
+    # viewport height – pin body height to viewport width × layout aspect so
     # panels keep their print aspect and the page scrolls vertically.
     if layout_w and layout_h and float(layout_h) > float(layout_w):
         aspect = float(layout_h) / float(layout_w)

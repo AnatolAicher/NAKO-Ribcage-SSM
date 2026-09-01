@@ -106,7 +106,7 @@ def generalisation(
     Returns
     -------
     mode_counts : (K,) int
-    errors_mean : (K,) float — mean per-vertex RMS error across held-out samples.
+    errors_mean : (K,) float – mean per-vertex RMS error across held-out samples.
     """
     X = _flatten(shapes)
     n, D = X.shape
@@ -167,7 +167,7 @@ def specificity(
     Returns
     -------
     mode_counts      : (K,) int
-    specificity_mean : (K,) float — lower is better (samples close to data).
+    specificity_mean : (K,) float – lower is better (samples close to data).
     """
     X = _flatten(shapes)
     n, D = X.shape

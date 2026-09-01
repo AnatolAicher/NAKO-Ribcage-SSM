@@ -3,9 +3,9 @@
 Installs ``pio.templates["nako"]`` (the project-wide visual default) and
 exposes:
 
-  * :func:`apply_layout` — canonical width / height / margins. Figures size
+  * :func:`apply_layout` – canonical width / height / margins. Figures size
     themselves via ``width_class``; no raw ``width=`` at call sites.
-  * :func:`add_panel_label` — bold ``a`` / ``b`` / ``c`` panel label.
+  * :func:`add_panel_label` – bold ``a`` / ``b`` / ``c`` panel label.
 
 All figure-shaping values come from :mod:`settings`.
 """
@@ -33,7 +33,7 @@ def pt_to_px(pt: float) -> float:
     Plotly's ``font.size`` is in CSS pixels at 96 dpi, not points; multiplying
     by ``SCREEN_DPI / 72`` (= 4/3) yields the pixel value that renders at the
     requested physical point size when the figure is printed at its layout
-    width. Matplotlib ``fontsize=`` is already in points — do not wrap it.
+    width. Matplotlib ``fontsize=`` is already in points – do not wrap it.
     """
     return pt * S.SCREEN_DPI / 72
 
@@ -173,7 +173,7 @@ def _wrap_title(text: str, width_class: WIDTH_CLASS) -> str:
     """Insert ``<br>`` at word boundaries so each line fits the figure width.
 
     Honours pre-existing ``<br>`` in the input. The per-class budget is a rough
-    glyph count at ``FONT_SIZE_TITLE_PT`` — enough to keep titles within the
+    glyph count at ``FONT_SIZE_TITLE_PT`` – enough to keep titles within the
     plot's print width without measuring text metrics.
     """
     budget = _TITLE_CHAR_BUDGET[width_class]
@@ -211,7 +211,7 @@ def apply_layout(
     width_class
         ``"full"`` (170 mm), ``"half"`` (85 mm), or ``"third"`` (56 mm).
         Default ``"full"`` per the project-wide consistency requirement
-        — only opt into a narrower width when the figure is genuinely a
+        – only opt into a narrower width when the figure is genuinely a
         side-by-side small element.
     n_rows
         Number of plot rows.  When ``height_mm`` is not given, the
@@ -349,7 +349,7 @@ def place_colorbar_right(
 
     ``xanchor='left'`` plus ``x=1.0`` puts the colorbar *just outside* the plot
     box; Plotly does not auto-expand the right margin for colorbars, so callers
-    must ensure ``layout.margin.r`` is wide enough — the ``MARGIN_PX['r']``
+    must ensure ``layout.margin.r`` is wide enough – the ``MARGIN_PX['r']``
     floor (40 px) accommodates the default thickness/title; bump per-figure
     via :func:`reserve_colorbar_margin` only for unusually wide titles.
     """

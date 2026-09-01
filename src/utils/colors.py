@@ -70,20 +70,20 @@ TEAL = mcolors.LinearSegmentedColormap.from_list("Teal", [
     "#4f90a6", "#3b738f", "#2a5674",
 ])
 
-# Plotly diverging.Portland — used for per-side rib ramps (negative half →
+# Plotly diverging.Portland – used for per-side rib ramps (negative half →
 # rib_left, positive half → rib_right) so left/right share a single tonal
 # family without competing with the diverging "correlation" scale.
 PORTLAND = mcolors.LinearSegmentedColormap.from_list("Portland", [
     "#0c3383", "#0a88ba", "#f2d338", "#f28f38", "#d91e1e",
 ])
 
-# CARTO sequential Sunsetdark — side-independent rib_level ramp.
+# CARTO sequential Sunsetdark – side-independent rib_level ramp.
 SUNSETDARK = mcolors.LinearSegmentedColormap.from_list("Sunsetdark", [
     "#fcde9c", "#faa476", "#f0746e", "#e34f6f",
     "#dc3977", "#b9257a", "#7c1d6f",
 ])
 
-# cmocean sequential turbid (matches Plotly's `turbid`) — pack_years dose ramp
+# cmocean sequential turbid (matches Plotly's `turbid`) – pack_years dose ramp
 # and the 3-point smoking scale (sampled at t = 0 / 0.5 / 1).
 TURBID = mcolors.LinearSegmentedColormap.from_list("turbid", [
     "#e9f6ab", "#dfe292", "#d7cf7b", "#cfbc66", "#c8a954", "#bf9747",
@@ -102,7 +102,7 @@ _SEX = {
 _SEX_ALIAS = {"M": _SEX["Male"], "F": _SEX["Female"],
               "male": _SEX["Male"], "female": _SEX["Female"]}
 
-# turbid sampled at t = 0 / 0.5 / 1 — an ordered ramp whose three stops clear
+# turbid sampled at t = 0 / 0.5 / 1 – an ordered ramp whose three stops clear
 # the ΔE76 ≥ 18 colour-blind separation test (tests/test_palette.py).
 _SMOKE = {
     "Never":     _rgba_to_hex(TURBID(0.0)),  # pale yellow
@@ -139,7 +139,7 @@ PALETTE: dict[str, object] = {
     "pack_years":   _truncate(TURBID, vmin=0.0, name="turbid"),
 
     # --- per-side rib ramps; position along ramp = rib level (T8 → T19).
-    # Both halves of Portland diverging — left = blues, right = oranges/reds.
+    # Both halves of Portland diverging – left = blues, right = oranges/reds.
     # _truncate accepts reversed bounds (vmin > vmax via np.linspace) so the
     # LIGHT end of each truncated cmap (t=0.0) corresponds to T8 and the DARK
     # end (t=1.0) to T19. Stops chosen inside [0, 0.30] and [0.70, 1.0] to
@@ -306,7 +306,7 @@ def rib_colors(
     Parameters
     ----------
     levels
-        Rib level per output entry. Vertebral T8..T19 or seg-label 40..51 —
+        Rib level per output entry. Vertebral T8..T19 or seg-label 40..51 –
         the function infers which.
     sides
         Side per entry. Accepts ``L``/``R`` or ``Left``/``Right`` (case-insensitive).
@@ -316,7 +316,7 @@ def rib_colors(
     if len(levels) != len(sides):
         raise ValueError(
             f"colors.rib_colors(): len(levels)={len(levels)} but "
-            f"len(sides)={len(sides)} — they must be parallel."
+            f"len(sides)={len(sides)} – they must be parallel."
         )
     cm_left  = cmap("rib_left")
     cm_right = cmap("rib_right")

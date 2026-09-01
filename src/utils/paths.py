@@ -41,7 +41,7 @@ def stage_dir(run_dir: Path | str, stage: str) -> Path:
 
 
 def preset_root(root: Path | str, name: str) -> Path:
-    """Return ``<root>/<name>/`` — the parent of every per-preset artifact."""
+    """Return ``<root>/<name>/`` – the parent of every per-preset artifact."""
     return Path(root) / name
 
 

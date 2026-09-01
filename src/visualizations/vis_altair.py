@@ -302,7 +302,7 @@ _BROWSER_TEMPLATE = """<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Shape by rib — browser</title>
+  <title>Shape by rib – browser</title>
   <style>
     body {{ font-family: Inter, Helvetica, Arial, sans-serif; margin: 16px; }}
     h1 {{ font-size: 16px; margin: 0 0 4px 0; }}

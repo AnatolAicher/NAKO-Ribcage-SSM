@@ -1,7 +1,7 @@
 """Tests for the shared OLS engine (utils.regression).
 
 The empty-result-schema tests guard the invariant that downstream runners
-(run_adjusted, run_ssm) index result columns unconditionally — an all-filtered
+(run_adjusted, run_ssm) index result columns unconditionally – an all-filtered
 cohort must still return the documented columns, not a column-less frame.
 """
 from __future__ import annotations

@@ -29,7 +29,7 @@ manuscript/
 # Deprecated old-pipeline files preserved on-disk for reference
 /.deprecated/
 
-# Local files — *.local.* is reserved for host-local sidecars
+# Local files – *.local.* is reserved for host-local sidecars
 *.local.*
 
 

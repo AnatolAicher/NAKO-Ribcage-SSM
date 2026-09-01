@@ -154,7 +154,7 @@ def test_find_seed_voxel_P_falls_back_when_vert_missing() -> None:
     """Without a vertebra mask, P is the most posterior rib voxel (min dim-1)."""
     rib = np.zeros((10, 10, 10), dtype=bool)
     rib[5, 7, 3] = True
-    rib[5, 2, 3] = True  # smaller dim-1 — anatomical "most posterior"
+    rib[5, 2, 3] = True  # smaller dim-1 – anatomical "most posterior"
     rib[5, 9, 3] = True
     vert = np.zeros_like(rib)
 
@@ -196,7 +196,7 @@ def test_geodesic_and_far_endpoint_on_l_shape() -> None:
     assert tuple(Q) == (9, 9, 2)
 
     # 18 cardinal steps from (0,0,2) via (9,0,2) to (9,9,2). MCP_Geometric
-    # may include or exclude the source's own cost — accept either.
+    # may include or exclude the source's own cost – accept either.
     assert 17.0 <= geo[9, 9, 2] <= 19.5
 
 
@@ -237,7 +237,7 @@ def test_centered_path_stays_inside_thick_tube() -> None:
     for i, j, k in path:
         assert mask[i, j, k], f"path voxel ({i},{j},{k}) outside mask"
 
-    # Every path voxel sits in a thick region — EDT well above the mean.
+    # Every path voxel sits in a thick region – EDT well above the mean.
     edt_along_path = np.array([edt[i, j, k] for i, j, k in path])
     mean_edt_in_mask = edt[mask].mean()
     assert edt_along_path.min() >= 0.5 * mean_edt_in_mask, (
@@ -250,7 +250,7 @@ def test_two_pass_endpoints_robust_to_C_shift() -> None:
     """A,B endpoints are stable across small shifts of the reference C.
 
     The graph-diameter trick (two geodesic passes) means a noisy C only
-    changes which end gets labelled proximal vs distal — never the
+    changes which end gets labelled proximal vs distal – never the
     geometric positions of A, B.
     """
     # 1-voxel-wide L-shaped rib (19 voxels total), like the geodesic test.
@@ -296,8 +296,8 @@ def test_extract_centerline_from_nifti_synthetic() -> None:
     pts = result["points_mesh_frame"]
     assert pts.shape == (20, 3)
 
-    # First point near (5, 6, 6) — closest medial voxel to the vertebra.
-    # Last point near (44, 6, 6) — far end of the tube.
+    # First point near (5, 6, 6) – closest medial voxel to the vertebra.
+    # Last point near (44, 6, 6) – far end of the tube.
     assert abs(pts[0, 0] - 5) <= 1.5
     assert abs(pts[-1, 0] - 44) <= 1.5
     np.testing.assert_allclose(pts[0, 1:], [6, 6], atol=1.5)

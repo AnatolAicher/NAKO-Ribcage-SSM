@@ -555,7 +555,7 @@ object NonRigid:
 
   /** Lift a closest-point-on-surface result from `prev` back to the reference
    *  frame. `prev` shares topology with `referenceMesh`, so ids map 1:1.
-   *  Returns `(refAnchor, srcVertexId)` — barycentric-interpolated anchor +
+   *  Returns `(refAnchor, srcVertexId)` – barycentric-interpolated anchor +
    *  the largest-weight vertex id (for the normal lookup). */
   private def liftToReference(
       cp: scalismo.mesh.boundingSpheres.ClosestPointWithType,
@@ -748,7 +748,7 @@ object Register:
     }
     if rawPairs.size < 50 then
       throw new RuntimeException(
-        s"registerOne: too few similarity-fit pairs (${rawPairs.size}) — pose alignment failed")
+        s"registerOne: too few similarity-fit pairs (${rawPairs.size}) – pose alignment failed")
 
     val nP = rawPairs.size
     val srcMat = DenseMatrix.zeros[Double](nP, 3)
@@ -790,7 +790,7 @@ final case class CliArgs(
     verbose: Boolean,
     bidirectional: Boolean,
     /** When set, additionally dump three per-stage STL sets for this one
-     *  patient — used to build the methodology figure. No effect on the
+     *  patient – used to build the methodology figure. No effect on the
      *  production per-rib output. */
     methodologyPatientId: Option[String],
 )

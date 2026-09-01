@@ -47,7 +47,7 @@ MANIFEST_NAME = "figures_manifest.json"
 SCHEMA_VERSION = "nako-figures-manifest/2"
 
 # Caller-supplied record fields persisted to disk. Absolute paths (`stem`,
-# `files`) are deliberately excluded — they leak host-local layout and are
+# `files`) are deliberately excluded – they leak host-local layout and are
 # reconstructable from the manifest directory + record key + `formats`.
 _PERSISTED_RECORD_FIELDS = ("formats", "title", "width_class")
 
@@ -96,5 +96,5 @@ def append_manifest(dirpath: str | Path, name: str, record: dict) -> None:
 
 
 def read_manifest(dirpath: str | Path) -> dict[str, Any]:
-    """Public read helper — returns the parsed manifest dict (empty if missing)."""
+    """Public read helper – returns the parsed manifest dict (empty if missing)."""
     return _read_manifest(Path(dirpath))

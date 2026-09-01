@@ -5,13 +5,13 @@ closest-point distances for every patient with all 24 registered + 24 raw ribs.
 
 Products
 --------
-- ``<run>/ssm_qa_residuals/residuals_per_patient.npz`` — per-patient forward
+- ``<run>/ssm_qa_residuals/residuals_per_patient.npz`` – per-patient forward
   and reverse arrays (variable-length per rib).
 - ``<run>/ssm_qa_residuals/figures/worst_patients_residuals_{forward,reverse}.png``
-  — matplotlib Poly3DCollection mosaics of the worst N patients
+  – matplotlib Poly3DCollection mosaics of the worst N patients
   (rendering failures are caught; the NPZ harvest is preserved).
 - ``<run>/ssm_qa_residuals/figures/residuals_distribution_{forward,reverse}.{html,svg,png}``
-  — per-level mirrored Altair ridgelines over the pooled per-vertex residuals
+  – per-level mirrored Altair ridgelines over the pooled per-vertex residuals
   (:func:`ssm.plots_ssm_altair.plot_residual_distribution`).
 
 CLI::
@@ -147,14 +147,14 @@ def _harvest_patient(
         tgt_m = _load_stl(tgt_p)
         # ``pv.read`` does NOT raise when the underlying vtkSTLReader
         # bails out on a malformed STL (non-finite triangle normals,
-        # truncated file, etc.) — it logs a warning and returns an empty
+        # truncated file, etc.) – it logs a warning and returns an empty
         # PolyData. Skip the whole patient in that case so downstream
         # aggregation never sees zero-vertex meshes (would crash
         # ``np.percentile`` and cKDTree).
         if reg_m.n_points == 0 or tgt_m.n_points == 0:
             logger.warning(
                 "pid=%d %s: empty mesh after pv.read "
-                "(reg_pts=%d tgt_pts=%d) — skipping patient.",
+                "(reg_pts=%d tgt_pts=%d) – skipping patient.",
                 pid, rib_id, reg_m.n_points, tgt_m.n_points,
             )
             return None
@@ -192,7 +192,7 @@ def _harvest_residuals(
         if reg_m.n_points == 0 or tgt_m.n_points == 0:
             logger.warning(
                 "pid=%d %s: empty mesh after pv.read "
-                "(reg_pts=%d tgt_pts=%d) — skipping patient.",
+                "(reg_pts=%d tgt_pts=%d) – skipping patient.",
                 pid, rib_id, reg_m.n_points, tgt_m.n_points,
             )
             return None
@@ -214,7 +214,7 @@ def _harvest_residuals_keyed(
     return pid, _harvest_residuals(pid, registered_dir, target_dir, rib_ids)
 
 
-# ── Mosaic rendering (matplotlib Poly3DCollection — pure CPU) ────────────────
+# ── Mosaic rendering (matplotlib Poly3DCollection – pure CPU) ────────────────
 # PyVista's off-screen renderer needs OSMesa or EGL on headless servers; on
 # Singularity containers without those, vtkOpenGLRenderWindow segfaults.
 # matplotlib's mpl_toolkits.mplot3d works without any GPU/OpenGL.
@@ -297,7 +297,7 @@ def render_mosaic(
     cols: int = 3,
     direction: str = "forward",
 ) -> None:
-    """Worst-N residual mosaic — Plotly Mesh3d HTML + matplotlib PNG fallback.
+    """Worst-N residual mosaic – Plotly Mesh3d HTML + matplotlib PNG fallback.
 
     HTML uses one Plotly subplot grid of Mesh3d traces (vertex colour =
     per-vertex residual in ``direction``).  Print-quality static export
@@ -311,7 +311,7 @@ def render_mosaic(
     """
     n = len(patients)
     if n == 0:
-        logger.warning("No patients to render — skipping mosaic.")
+        logger.warning("No patients to render – skipping mosaic.")
         return
     rows = (n + cols - 1) // cols
 
@@ -447,7 +447,7 @@ def load_residuals_npz(
 
     Returns ``(per_patient, p95_by_pid, rib_ids)`` matching the structures
     built in :func:`main`. Per-patient dicts contain only the residual
-    arrays — ``registered`` / ``target`` PolyData must be reharvested
+    arrays – ``registered`` / ``target`` PolyData must be reharvested
     separately for the worst-N mosaic.
     """
     data = np.load(Path(path), allow_pickle=False)
@@ -555,7 +555,7 @@ def main() -> None:
     )
     # Stream results unordered so progress logs reflect actual throughput.
     # With ``return_as='generator'`` (ordered) joblib would block the consumer
-    # whenever the next-in-submission-order patient hasn't finished yet — a
+    # whenever the next-in-submission-order patient hasn't finished yet – a
     # single slow NFS read on patient #1 stalls all output until it clears,
     # then a burst.  Unordered yields results as workers complete them; the
     # worker wrapper returns ``(pid, result)`` so the dict build is direct.
@@ -589,8 +589,8 @@ def main() -> None:
             eta_s = (n_total - i) / rate if rate > 0 else 0.0
             logger.info(
                 f"  Harvest progress: {i:,}/{n_total:,} "
-                f"({100 * i / n_total:.1f}%) — {rate:.2f} pat/s "
-                f"— elapsed {elapsed:.0f}s — ETA {eta_s:.0f}s"
+                f"({100 * i / n_total:.1f}%) – {rate:.2f} pat/s "
+                f"– elapsed {elapsed:.0f}s – ETA {eta_s:.0f}s"
             )
             last_log_t = now
     logger.info(f"  Harvest pass done in {time.monotonic() - t0:.0f}s")
@@ -630,14 +630,14 @@ def main() -> None:
         ranked = sorted(per_patient.keys(),
                         key=lambda p, dr=direction: -p95_by_pid[dr][p])
         worst = ranked[: args.worst_n]
-        # Reharvest meshes for the worst-N only — the bulk harvest above
+        # Reharvest meshes for the worst-N only – the bulk harvest above
         # dropped PolyData to keep peak RAM bounded.
         panels: list[tuple[int, dict, float]] = []
         for pid in worst:
             full = _harvest_patient(pid, registered_dir, target_dir, rib_ids)
             if full is None:
                 logger.warning(
-                    f"Could not reharvest STLs for pid={pid} — skipping mosaic panel."
+                    f"Could not reharvest STLs for pid={pid} – skipping mosaic panel."
                 )
                 continue
             panels.append((pid, full, p95_by_pid[direction][pid]))
@@ -647,7 +647,7 @@ def main() -> None:
         )
         if not panels:
             logger.warning(
-                f"No reharvestable patients for {direction} mosaic — skipping."
+                f"No reharvestable patients for {direction} mosaic – skipping."
             )
         else:
             try:

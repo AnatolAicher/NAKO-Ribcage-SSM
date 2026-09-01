@@ -43,8 +43,8 @@ def plot_adj_heatmap(
     """Heatmap of standardised β with FDR-non-significant cells masked."""
     out_stem = _strip_format_suffix(Path(out_stem))
     if title is None:
-        prefix = f"Model {model_label} — " if model_label else ""
-        title_text = f"{prefix}Adjusted OLS — standardised β"
+        prefix = f"Model {model_label} – " if model_label else ""
+        title_text = f"{prefix}Adjusted OLS – standardised β"
     else:
         title_text = title
     subtitle = (f"Cluster-robust SE · FDR-masked at q ≥ {FDR_DISPLAY_ALPHA} "
@@ -98,8 +98,8 @@ def plot_partial_r2_heatmap(
     z.index = q.index = new_idx
 
     if title is None:
-        prefix = f"Model {model_label} — " if model_label else ""
-        title_text = f"{prefix}Adjusted OLS — partial R²"
+        prefix = f"Model {model_label} – " if model_label else ""
+        title_text = f"{prefix}Adjusted OLS – partial R²"
     else:
         title_text = title
     subtitle = (f"FDR-masked at q ≥ {FDR_DISPLAY_ALPHA} (empty cells) · "
@@ -145,8 +145,8 @@ def plot_forest_plots(
     long["shape_label"] = long["shape_param"].map(_slabel)
     shape_order = [_slabel(s) for s in available]
 
-    prefix = f"Model {model_label} — " if model_label else ""
-    title_text = f"{prefix}Adjusted OLS — standardised β with 95 % CI"
+    prefix = f"Model {model_label} – " if model_label else ""
+    title_text = f"{prefix}Adjusted OLS – standardised β with 95 % CI"
     subtitle = "Cluster-robust SE · BH-FDR"
     chart = _build_forest_facet(
         long, pred_order=pred_labels, label_col="shape_label",
@@ -154,6 +154,6 @@ def plot_forest_plots(
         columns=2, width_px=width_for("half"),
         title=make_title(title_text, subtitle=subtitle),
     )
-    save_chart(chart, out_stem, title="Adjusted OLS — forest plots",
+    save_chart(chart, out_stem, title="Adjusted OLS – forest plots",
                width_class="full")
 

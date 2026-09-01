@@ -1,4 +1,4 @@
-"""Unit tests for utils.rib_labels — display / CLI / data conversions."""
+"""Unit tests for utils.rib_labels – display / CLI / data conversions."""
 from __future__ import annotations
 
 import pytest

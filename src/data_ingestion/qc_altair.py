@@ -110,7 +110,7 @@ def plot_missingness(
 ) -> None:
     """Horizontal bar of percent-missing per variable."""
     if miss_report is None or miss_report.empty:
-        logger.info("Missingness report empty — no figure produced.")
+        logger.info("Missingness report empty – no figure produced.")
         return
     rep = miss_report.sort_values("pct_missing", ascending=False).reset_index()
     rep = rep.rename(columns={rep.columns[0]: "variable"})
@@ -359,7 +359,7 @@ def plot_distributions(
     save_chart(chart, out_dir / out_stem, title=title_text, width_class="full")
 
 
-# ── Inclusion flow (bars — Vega-Lite has no Sankey) ──────────────────────────
+# ── Inclusion flow (bars – Vega-Lite has no Sankey) ──────────────────────────
 
 def plot_inclusion_flow(
     excl_df: pd.DataFrame,

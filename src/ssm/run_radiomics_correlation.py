@@ -136,7 +136,7 @@ def main() -> None:
     elapsed = time.monotonic() - t0
     m, s = divmod(elapsed, 60)
     logger.info(
-        f"radiomics_correlation complete — {m:.0f}m{s:.0f}s  "
+        f"radiomics_correlation complete – {m:.0f}m{s:.0f}s  "
         f"({n_sig:,}/{len(effects):,} effects FDR-significant at q<{FDR_DISPLAY_ALPHA})"
     )
 

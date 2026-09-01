@@ -44,7 +44,7 @@ UNADJ_PREDICTORS: list[str] = ["is_female", "age", "height_cm", "weight_kg", "bm
                                "body_fat_pct", "ever_smoker", "pack_years"]
 PRED_PREDICTORS:  list[str] = ADJ_PREDICTORS
 
-# Per-exposure back-door adjustment sets — the machine-readable DAG behind the
+# Per-exposure back-door adjustment sets – the machine-readable DAG behind the
 # targeted (set-3) analysis. sex/age are exogenous roots (total effect = marginal;
 # the other root is added only for precision); the remaining exposures are not
 # point-identified under assumed latent confounding, so their estimate is a
@@ -85,7 +85,7 @@ FIG_WIDTH_THIRD_MM: float = 56.0     # 3-up panel grid (170/3 minus gutter)
 # Default per-row height; multi-row figures = N × this.
 FIG_ROW_HEIGHT_MM:  float = 55.0
 
-# Plotly ``layout.margin`` in pixels at 96 dpi — used as the *floor* the
+# Plotly ``layout.margin`` in pixels at 96 dpi – used as the *floor* the
 # template's ``axis.automargin`` / ``title.automargin`` grow from. ``r=40``
 # gives the colorbar helper headroom; per-helper margin bumps may grow it
 # further. Bottom decorations (``annotate_n``, horizontal legend) attach to

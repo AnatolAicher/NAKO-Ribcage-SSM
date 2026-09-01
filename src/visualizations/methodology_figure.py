@@ -1,6 +1,6 @@
 """Nine-panel methodology figure for one display patient.
 
-Walks one patient through the full pipeline — raw MRI slices, segmentation
+Walks one patient through the full pipeline – raw MRI slices, segmentation
 overlay, 3D segmentation, PyRadiomics descriptors on a single rib, the
 four mesh-to-template registration stages, and a combined GPA + PCA panel
 showing the PC1 ±2σ mean-shape envelope alongside the patient and a per-PC
@@ -351,7 +351,7 @@ def _centroid_bbox_slices(seg_vol: np.ndarray, labels: list[int]) -> tuple[int, 
     mask = np.isin(seg_vol, labels)
     if not mask.any():
         raise RuntimeError(
-            "rib-mask bbox is empty — segmentation has no rib labels."
+            "rib-mask bbox is empty – segmentation has no rib labels."
         )
     coords = np.argwhere(mask)
     lo = coords.min(axis=0)
@@ -393,7 +393,7 @@ def _build_figure(bundle: dict, pid: int, n_pcs_table: int) -> plt.Figure:
     for ax in axes.values():
         ax.set_facecolor("none")
 
-    # Intensity window for the MRI underlay — once, reused across A/B panels.
+    # Intensity window for the MRI underlay – once, reused across A/B panels.
     nz = bundle["mri_vol"][bundle["mri_vol"] > 0]
     if nz.size == 0:
         vmin, vmax = 0.0, 1.0
@@ -449,14 +449,14 @@ def _build_figure(bundle: dict, pid: int, n_pcs_table: int) -> plt.Figure:
     )
 
     panel_titles: list[tuple[list[str], str, str]] = [
-        (["A1", "A2", "A3"], "A. Raw MRI",                   "patient — VIBE"),
+        (["A1", "A2", "A3"], "A. Raw MRI",                   "patient – VIBE"),
         (["B1", "B2", "B3"], "B. Segmented MRI",             "ribs segmented"),
         (["C"],              "C. 3D mesh extraction",        "24 per-rib meshes"),
         (["D"],              "D. Descriptors",               "PyRadiomics on rib 7 R"),
-        (["E"],              "E. Before alignment",          "patient + template — scanner-native frames"),
-        (["F"],              "F. After whole-cage",          "rigid Procrustes — cage frame"),
-        (["G"],              "G. After per-rib registration","sim. + rigid ICP — cage frame"),
-        (["H"],              "H. After Gaussian-Process fit","non-rigid surface deformation — cage frame"),
+        (["E"],              "E. Before alignment",          "patient + template – scanner-native frames"),
+        (["F"],              "F. After whole-cage",          "rigid Procrustes – cage frame"),
+        (["G"],              "G. After per-rib registration","sim. + rigid ICP – cage frame"),
+        (["H"],              "H. After Gaussian-Process fit","non-rigid surface deformation – cage frame"),
         (["I"],              "I. After GPA & PCA",           "mean shape ±2σ along PC1 (viridis = |Δ| from mean, mm) + patient PC scores"),
     ]
     for keys, title, subtitle in panel_titles:
@@ -617,8 +617,8 @@ def _orientation_labels(ax: plt.Axes, left: str, right: str, top: str, bottom: s
 
 # ── 3D rendering helpers ───────────────────────────────────────────────────
 # Headless-safe: all 3D panels render via matplotlib's mpl_toolkits.mplot3d
-# (Poly3DCollection). PyVista is used only for STL parsing — never for VTK
-# rendering — so no OSMesa / EGL / X server is required at runtime.
+# (Poly3DCollection). PyVista is used only for STL parsing – never for VTK
+# rendering – so no OSMesa / EGL / X server is required at runtime.
 
 def _add_3d_inset(ax: plt.Axes, *, bottom: float = 0.0) -> plt.Axes:
     """Convert a 2D mosaic cell into a 3D axis filling its area.
@@ -705,7 +705,7 @@ def _panel_d_radiomics(
     centroid     = verts.mean(axis=0)
 
     # Principal axes via PCA on vertex positions; only the first (major axis)
-    # is drawn — to illustrate one descriptor in situ, not all three.
+    # is drawn – to illustrate one descriptor in situ, not all three.
     cov         = np.cov(verts.T)
     evals, evec = np.linalg.eigh(cov)
     major_dir   = evec[:, int(np.argmax(evals))]
@@ -750,14 +750,14 @@ def _descriptor_table(ax: plt.Axes, row: pd.Series, rib_anat: int, side: str) ->
         val   = row.get(c, np.nan)
         unit  = UNITS.get(c, "")
         if pd.isna(val):
-            vtxt = "—"
+            vtxt = "–"
         elif unit in ("mm^2", "mm^3", "1/mm") or abs(val) >= 100:
             vtxt = f"{val:.1f}"
         else:
             vtxt = f"{val:.3g}"
         cell_text.append([short(c), vtxt, unit])
 
-    title = f"Rib {rib_anat} {side} — shape descriptors"
+    title = f"Rib {rib_anat} {side} – shape descriptors"
     ax.set_title(title, fontsize=S.FONT_SIZE_TICK_PT,
                  fontweight="bold", loc="left", pad=4)
     tbl = ax.table(
@@ -788,7 +788,7 @@ def _panel_e_before(
     """Patient + template, each rendered in its own scanner-native frame.
 
     Two side-by-side 3D viewports communicate "two independent meshes in
-    different frames" — overlaying both in one viewport often makes them
+    different frames" – overlaying both in one viewport often makes them
     look already aligned because typical scanner conventions put them at
     similar mm coordinates.
     """
@@ -853,7 +853,7 @@ def _panel_f_whole_cage(
     )
 
 
-# ── Panels G/H: per-rib steps — full cage + single-rib zoom ────────────────
+# ── Panels G/H: per-rib steps – full cage + single-rib zoom ────────────────
 
 def _two_viewport_pair(
     ax: plt.Axes,
@@ -888,7 +888,7 @@ def _two_viewport_pair(
     set_cube_bounds(ax_full, full_verts)
     style_axis(ax_full)
 
-    # Single rib zoom — use the same rib identity as panel 4 (default rib 7 R).
+    # Single rib zoom – use the same rib identity as panel 4 (default rib 7 R).
     rib_anat = vert_to_anatomical(radiomics_vert)
     seg_lab  = anatomical_to_seg(rib_anat)
     side     = radiomics_side
@@ -953,7 +953,7 @@ def _panel_h_gp_fit(
     )
 
 
-# ── Panel I: merged GPA + PCA — PC1 ±2σ meshes, patient, sparkline table ──
+# ── Panel I: merged GPA + PCA – PC1 ±2σ meshes, patient, sparkline table ──
 
 def _panel_i_gpa_pca(
     ax: plt.Axes,
@@ -1133,8 +1133,8 @@ def _sparkline_score_table(
 
 # Representative left+right colours from utils.colors.rib_colors, used as a
 # two-square swatch in the legend to indicate "patient uses the per-rib palette".
-_PATIENT_SWATCH_L = "#5091A6"   # rib_colors([46], ['L']) — mid-teal
-_PATIENT_SWATCH_R = "#E53127"   # rib_colors([46], ['R']) — mid-red
+_PATIENT_SWATCH_L = "#5091A6"   # rib_colors([46], ['L']) – mid-teal
+_PATIENT_SWATCH_R = "#E53127"   # rib_colors([46], ['R']) – mid-red
 
 
 def _patient_plus_one_legend(

@@ -118,12 +118,12 @@ def parse_args() -> argparse.Namespace:
 
 @contextlib.contextmanager
 def _step(label: str):
-    logger.info(f"--- {label} — START ---")
+    logger.info(f"--- {label} – START ---")
     t = time.monotonic()
     yield
     elapsed = time.monotonic() - t
     m, s = divmod(elapsed, 60)
-    logger.info(f"--- {label} — DONE  ({m:.0f}m{s:.0f}s) ---")
+    logger.info(f"--- {label} – DONE  ({m:.0f}m{s:.0f}s) ---")
 
 
 def main() -> None:
@@ -173,7 +173,7 @@ def main() -> None:
         except (OSError, ValueError) as exc:  # Parquet/network read flake
             if attempt == 5:
                 raise
-            logger.warning(f"Parquet read failed (attempt {attempt}/5): {exc} — retrying in 10s")
+            logger.warning(f"Parquet read failed (attempt {attempt}/5): {exc} – retrying in 10s")
             time.sleep(10)
     logger.info(f"Metadata loaded: {len(meta_df):,} patients")
 
@@ -220,7 +220,7 @@ def main() -> None:
         if cached_vt is None or not np.isclose(cached_vt, args.variance_threshold):
             logger.info(
                 f"PCA cache variance_threshold={cached_vt} differs from "
-                f"requested {args.variance_threshold} — recomputing."
+                f"requested {args.variance_threshold} – recomputing."
             )
             recompute_pca = True
 
@@ -312,9 +312,9 @@ def main() -> None:
                     n_pcs=N_PCS_DISPLAY,
                 )
             else:
-                logger.warning("Incomplete template ribs — skipping deformation renders")
+                logger.warning("Incomplete template ribs – skipping deformation renders")
         else:
-            logger.warning("template_id.txt not found — skipping deformation renders")
+            logger.warning("template_id.txt not found – skipping deformation renders")
 
     # ── PC scores ────────────────────────────────────────────────────────────
     with _step("PC scores"):
@@ -356,7 +356,7 @@ def main() -> None:
         with _step("Regression heatmap (DAG-based)"):
             sm.plot_regression_heatmap_surface(
                 results["targeted"], figs_dir / "pc_regression_targeted",
-                title="Surface SSM — DAG-based per-exposure PC regression (standardised β)",
+                title="Surface SSM – DAG-based per-exposure PC regression (standardised β)",
                 subtitle="Per-exposure back-door adjustment set · HC3-robust SE",
             )
 
@@ -417,7 +417,7 @@ def main() -> None:
 
     total_elapsed = time.monotonic() - pipeline_t0
     m, s = divmod(total_elapsed, 60)
-    logger.info(f"SSM Python pipeline complete — total wall time {m:.0f}m{s:.0f}s")
+    logger.info(f"SSM Python pipeline complete – total wall time {m:.0f}m{s:.0f}s")
 
 
 if __name__ == "__main__":

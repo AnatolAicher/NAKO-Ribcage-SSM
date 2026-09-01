@@ -62,7 +62,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--max-modes", type=int, default=25,
                    help="Cap on the number of PCA modes evaluated. "
                         "Default 25. Pass 0 to evaluate up to the rank ceiling "
-                        "min(N-1, D) — expensive on large cohorts.")
+                        "min(N-1, D) – expensive on large cohorts.")
     p.add_argument("--n-spec-samples", type=int, default=1000,
                    help="Number of random model samples for specificity. Default 1000.")
     p.add_argument("--n-loo-folds", type=int, default=10,
@@ -99,7 +99,7 @@ def _eval_one_stack(
     """Run all three Styner metrics on a single ``(N, n_pts, 3)`` stack."""
     n = shapes.shape[0]
     if n < 3:
-        logger.warning(f"[{name}] only {n} shapes — Styner triad needs ≥ 3; skipping.")
+        logger.warning(f"[{name}] only {n} shapes – Styner triad needs ≥ 3; skipping.")
         return {"n": int(n), "skipped": True}
 
     # Rank ceiling shared across the three metrics. Train size depends on
@@ -115,7 +115,7 @@ def _eval_one_stack(
 
     t0 = time.monotonic()
     cmp_curve = compactness(shapes, max_modes=eff_max)
-    logger.info(f"[{name}] compactness done — {time.monotonic()-t0:.1f}s")
+    logger.info(f"[{name}] compactness done – {time.monotonic()-t0:.1f}s")
 
     gen_label = "LOO" if (not n_folds or n_folds > n) else f"K={n_folds} folds"
     t0 = time.monotonic()
@@ -125,14 +125,14 @@ def _eval_one_stack(
     )
     logger.info(
         f"[{name}] generalisation ({gen_label}, n_workers={n_workers}) "
-        f"done — {time.monotonic()-t0:.1f}s"
+        f"done – {time.monotonic()-t0:.1f}s"
     )
 
     t0 = time.monotonic()
     spec_modes, spec_curve = specificity(
         shapes, n_samples=n_spec_samples, mode_counts=mode_counts,
     )
-    logger.info(f"[{name}] specificity ({n_spec_samples} samples) done — {time.monotonic()-t0:.1f}s")
+    logger.info(f"[{name}] specificity ({n_spec_samples} samples) done – {time.monotonic()-t0:.1f}s")
 
     return {
         "n":                int(n),
@@ -159,7 +159,7 @@ def plot_styner_triptych(
 
     Per-rib curves are drawn translucently with a bold median-over-ribs
     overlay; whole-cage is a separate bold dashed line. ``out_path`` may
-    be ``…/figures/eval_styner.png`` — the suffix is stripped and
+    be ``…/figures/eval_styner.png`` – the suffix is stripped and
     :func:`save_chart` writes HTML / SVG / PNG.
     """
     out_stem = out_path.with_suffix("") if out_path.suffix else out_path
@@ -258,7 +258,7 @@ def plot_styner_triptych(
             height=180,
         )
 
-    title_text = "Styner triad — surface SSM"
+    title_text = "Styner triad – surface SSM"
     chart = (
         alt.hconcat(*[_panel(*p) for p in panels])
         .resolve_scale(y="independent", color="shared")
@@ -285,7 +285,7 @@ def main() -> None:
     offsets_path = pca_dir / "rib_offsets.npy"
     for f in (shapes_path, offsets_path):
         if not f.exists():
-            raise FileNotFoundError(f"{f} not found — run the ssm_pca stage first.")
+            raise FileNotFoundError(f"{f} not found – run the ssm_pca stage first.")
 
     data    = np.load(shapes_path)
     shapes  = data["shapes"]
@@ -298,7 +298,7 @@ def main() -> None:
     rib_endpoints = list(offsets) + [n_total]
 
     # Per-rib evaluation.  Dict keys stay in the internal seg-label form
-    # (`rib40_L` … `rib51_R`) — that's the on-disk JSON contract.  The
+    # (`rib40_L` … `rib51_R`) – that's the on-disk JSON contract.  The
     # display form (`Rib 1 L` …) is used only in log lines so the
     # extraction job is readable to a human.
     per_rib: dict[str, dict] = {}

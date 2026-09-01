@@ -7,7 +7,7 @@ univariate OLS across subjects::
 
 where ``z(PC_j)`` is the PC score divided by its column SD (so β has units of
 "feature unit per 1 SD of PC"). The standardised effect ``β_std`` is obtained
-by additionally z-scoring the feature column — equivalent to Pearson *r*.
+by additionally z-scoring the feature column – equivalent to Pearson *r*.
 
 BH-FDR is applied per-PC family (24 × 14 tests per PC), mirroring the
 per-family convention in :mod:`ssm.pc_regression`.
@@ -44,8 +44,8 @@ def load_inputs(run_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame, list[str]]:
 
     Returns
     -------
-    pc_df          : one row per patient — ``patient_id, PC_1, …, PC_K``.
-    radiomics_df   : one row per (patient, vert_level, side) — radiomics columns.
+    pc_df          : one row per patient – ``patient_id, PC_1, …, PC_K``.
+    radiomics_df   : one row per (patient, vert_level, side) – radiomics columns.
     pc_cols        : sorted list of PC column names.
     """
     run_dir = Path(run_dir)
@@ -138,7 +138,7 @@ def compute_effects(
     if feature_cols is None:
         feature_cols = list(ANALYSIS_SHAPE_COLS)
 
-    # Z-score PCs once across the cohort — patient-level, not rib-level.
+    # Z-score PCs once across the cohort – patient-level, not rib-level.
     # Each patient appears up to 24 times in `joined`, but the PC value is
     # identical across their rows, so computing SD from drop_duplicates is
     # the patient-level (correct) statistic.

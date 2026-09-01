@@ -24,7 +24,7 @@ def align_to_target(source: np.ndarray, target: np.ndarray) -> np.ndarray:
 
     Returns
     -------
-    ``(N, 3)`` — aligned source in the target's coordinate frame.
+    ``(N, 3)`` – aligned source in the target's coordinate frame.
     """
     src_c = source - source.mean(axis=0)
     tgt_c = target - target.mean(axis=0)
@@ -59,9 +59,9 @@ def gpa(
 
     Returns
     -------
-    aligned    : ``(N_patients, N_landmarks, 3)`` — GPA-aligned shapes.
-    mean_shape : ``(N_landmarks, 3)`` — Procrustes mean shape.
-    rms_history: ``(n_iterations,)`` — relative mean-shape change at
+    aligned    : ``(N_patients, N_landmarks, 3)`` – GPA-aligned shapes.
+    mean_shape : ``(N_landmarks, 3)`` – Procrustes mean shape.
+    rms_history: ``(n_iterations,)`` – relative mean-shape change at
                  each iteration; useful for the convergence diagnostic
                  figure (:func:`ssm.plots_ssm.plot_gpa_convergence`).
     """

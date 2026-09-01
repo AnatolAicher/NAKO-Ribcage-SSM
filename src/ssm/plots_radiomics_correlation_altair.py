@@ -28,7 +28,7 @@ from utils.shape_labels import shape_label as _slabel
 logger = logging.getLogger(__name__)
 
 
-# Native unit per feature — colorbar / hover unit on per-feature heatmaps.
+# Native unit per feature – colorbar / hover unit on per-feature heatmaps.
 # Dimensionless features (ratios, sphericity) are left blank.
 _FEATURE_UNIT: dict[str, str] = {
     "original_shape_Elongation":              "",
@@ -128,7 +128,7 @@ def build_per_pc_heatmap(
     z_pivot = pd.DataFrame(z, index=rib_labels, columns=feat_labels)
     q_pivot = pd.DataFrame(q, index=rib_labels, columns=feat_labels) if mask_nonsig else None
 
-    title_text = f"PC × radiomics — {pc}"
+    title_text = f"PC × radiomics – {pc}"
     sig_clause = (f" · FDR-masked at q ≥ {FDR_DISPLAY_ALPHA} (empty cells)"
                   if mask_nonsig else "")
     subtitle = (f"Standardised β across {len(rib_labels)} ribs × "
@@ -174,7 +174,7 @@ def build_per_feature_heatmap(
     bar_title = f"β ({unit} per 1 SD PC)" if unit else "β (per 1 SD PC)"
     sig_clause = (f" · FDR-masked at q ≥ {FDR_DISPLAY_ALPHA} (empty cells)"
                   if mask_nonsig else "")
-    title_text = f"PC × radiomics — {_slabel(feature)}"
+    title_text = f"PC × radiomics – {_slabel(feature)}"
     subtitle = f"β in {unit or 'native units'} per 1 SD PC{sig_clause}"
 
     common = dict(
@@ -269,7 +269,7 @@ def build_per_pc_histo(
     rib_levels = sorted(long["rib"].unique())
     rib_color, color_sel = rib_side_color(rib_levels)
 
-    title_text = title or f"PC × radiomics — {pc} · mirrored bars"
+    title_text = title or f"PC × radiomics – {pc} · mirrored bars"
     subtitle = f"y = anatomical rib · x = signed β · {len(feat_order)} features"
     abs_max = float(long["signed_value"].abs().max() or 0.05) * 1.05
 
@@ -323,7 +323,7 @@ def build_per_feature_histo(
     if long.empty:
         return None
     long = long[long["pc"].isin(pc_cols)]
-    # Rank PCs by mean |β| across (rib, side) — keeps the top_n.
+    # Rank PCs by mean |β| across (rib, side) – keeps the top_n.
     rank = (long.assign(_abs=long["signed_value"].abs())
                  .groupby("pc")["_abs"].mean()
                  .sort_values(ascending=False))
@@ -338,7 +338,7 @@ def build_per_feature_histo(
     rib_levels = sorted(long["rib"].unique())
     rib_color, color_sel = rib_side_color(rib_levels)
 
-    title_text = title or f"PC × radiomics — {_slabel(feature)} · mirrored bars"
+    title_text = title or f"PC × radiomics – {_slabel(feature)} · mirrored bars"
     unit = _funit(feature)
     subtitle = (f"y = anatomical rib · x = signed β"
                 f"{f' ({unit} per 1 SD PC)' if unit else ''}"
@@ -415,7 +415,7 @@ def emit_all(
         save_chart(
             chart, per_pc_dir / f"pc{idx:0{n_digits}d}_std",
             formats=formats,
-            title=f"PC{idx} — standardised β heatmap (rib × feature)",
+            title=f"PC{idx} – standardised β heatmap (rib × feature)",
             width_class="full",
         )
         # Mirrored-bar companion next to the heatmap.
@@ -424,7 +424,7 @@ def emit_all(
             save_chart(
                 histo, per_pc_histo / f"pc{idx:0{n_digits}d}_std",
                 formats=formats,
-                title=f"PC{idx} — mirrored-bar β (rib × feature)",
+                title=f"PC{idx} – mirrored-bar β (rib × feature)",
                 width_class="full",
             )
 
@@ -433,7 +433,7 @@ def emit_all(
             effects, feat, pc_cols, mask_nonsig=mask_nonsig,
         )
         out_stem = per_feat_dir / f"{_slabel(feat)}_native"
-        title = f"{_slabel(feat)} — native-unit β heatmap (rib × PC)"
+        title = f"{_slabel(feat)} – native-unit β heatmap (rib × PC)"
         if html_formats and static_formats:
             save_chart_split(
                 html_chart, static_chart, out_stem,
@@ -452,7 +452,7 @@ def emit_all(
             save_chart(
                 histo, per_feat_histo / f"{_slabel(feat)}_native",
                 formats=formats,
-                title=f"{_slabel(feat)} — mirrored-bar β (rib × top PCs)",
+                title=f"{_slabel(feat)} – mirrored-bar β (rib × top PCs)",
                 width_class="full",
             )
 
@@ -462,14 +462,14 @@ def emit_all(
                        for pc in pc_cols]
         _write_index_html(
             per_pc_dir / "index.html",
-            title="PC × radiomics — per-PC browser",
+            title="PC × radiomics – per-PC browser",
             subtitle="Pick a principal component to view its rib × feature heatmap.",
             options=per_pc_html,
             select_label="PC:",
         )
         _write_index_html(
             per_pc_histo / "index.html",
-            title="PC × radiomics — per-PC mirrored bars",
+            title="PC × radiomics – per-PC mirrored bars",
             subtitle="Pick a PC to view its rib × feature mirrored-bar chart.",
             options=per_pc_html,
             select_label="PC:",
@@ -477,14 +477,14 @@ def emit_all(
         per_feat_html = [(_slabel(f), f"{_slabel(f)}_native.html") for f in feature_cols]
         _write_index_html(
             per_feat_dir / "index.html",
-            title="PC × radiomics — per-feature browser",
+            title="PC × radiomics – per-feature browser",
             subtitle="Pick a radiomics feature to view its rib × PC heatmap.",
             options=per_feat_html,
             select_label="Feature:",
         )
         _write_index_html(
             per_feat_histo / "index.html",
-            title="PC × radiomics — per-feature mirrored bars",
+            title="PC × radiomics – per-feature mirrored bars",
             subtitle="Pick a feature to view its rib × top-PC mirrored-bar chart.",
             options=per_feat_html,
             select_label="Feature:",

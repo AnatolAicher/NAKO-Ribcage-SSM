@@ -14,7 +14,7 @@ Optional per-rib landmark JSONs (``<ribId>_extracted.json``,
 ``<ribId>_registered.json``) are overlaid when present; the canonical
 pipeline does not generate them.
 
-The HTML page is self-contained — mesh + landmark data are inlined as
+The HTML page is self-contained – mesh + landmark data are inlined as
 JSON, so it works offline / from ``file://``.
 
 Resolution of input directories:
@@ -63,9 +63,9 @@ logger = logging.getLogger(__name__)
 # Matches filenames inside a per-patient sharded dir, e.g. ``100001_rib40_L.stl``.
 _RIB_FILE_RE = re.compile(r"^\d+_rib(\d+)_([LR])\.stl$")
 
-_RAW_COLOR = "#0072B2"        # Okabe-Ito blue   — selected patient (raw)
-_TPL_COLOR = "#CC79A7"        # Okabe-Ito purple — template (always shown)
-_REG_COLOR = "#E69F00"        # Okabe-Ito orange — Scalismo registered
+_RAW_COLOR = "#0072B2"        # Okabe-Ito blue   – selected patient (raw)
+_TPL_COLOR = "#CC79A7"        # Okabe-Ito purple – template (always shown)
+_REG_COLOR = "#E69F00"        # Okabe-Ito orange – Scalismo registered
 _MESH_OPACITY        = 0.55
 _MESH_OPACITY_DIMMED = 0.08   # ribs not under focus
 
@@ -339,7 +339,7 @@ def _rigid_align_raw_to_reg(
     """Orthogonal Procrustes (rotation + translation, no scale) from raw → reg.
 
     Uses the 24 per-rib centroids as the sparse correspondence. Scale is
-    excluded — body size is a study variable.
+    excluded – body size is a study variable.
     """
     raw_c = np.stack([v.mean(axis=0) for v, _ in raw_meshes])   # (24, 3)
     reg_c = np.stack([v.mean(axis=0) for v, _ in reg_meshes])   # (24, 3)
@@ -384,7 +384,7 @@ def _load_patient(
             stl = pdir / f"{pid}_rib{lab}_{side}.stl"
             res = _load_stl(stl)
             if res is None:
-                logger.warning("Patient %d: missing %s — skipping patient", pid, stl.name)
+                logger.warning("Patient %d: missing %s – skipping patient", pid, stl.name)
                 return None
             bucket.append(res)
 
@@ -508,7 +508,7 @@ _HTML_TEMPLATE = """\
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Diagnostic Viewer — Template / Raw / Registered Rib STLs</title>
+<title>Diagnostic Viewer – Template / Raw / Registered Rib STLs</title>
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -879,7 +879,7 @@ function updateStatus() {
   }
   const rec = M.data[selectedPid];
   if (!rec) {
-    el.textContent = tplPrefix + `patient ${selectedPid} — no data.`;
+    el.textContent = tplPrefix + `patient ${selectedPid} – no data.`;
     return;
   }
   let raw_v = 0, raw_f = 0, reg_v = 0, reg_f = 0;
@@ -991,7 +991,7 @@ def export_html(
     """
     # Only resolve a default run dir when actually needed: for output-path
     # default, or for metadata.json lookup when --target-dir / --registered-dir
-    # is unset.  ``landmark_dir`` does NOT force resolution — it's optional;
+    # is unset.  ``landmark_dir`` does NOT force resolution – it's optional;
     # if the run dir happens to be available, ``_resolve_landmark_dir`` will
     # opportunistically read ``paths.landmark_dir`` from its metadata, but
     # missing landmarks just mean the viewer renders meshes only.
@@ -1017,10 +1017,10 @@ def export_html(
     logger.info("Run dir       : %s", run_dir if run_dir else "(not resolved)")
     logger.info("Raw STL dir   : %s", extraction_dir)
     logger.info("Reg STL dir   : %s", reg_dir)
-    logger.info("Landmark dir  : %s", lm_dir if lm_dir else "(none — meshes only)")
+    logger.info("Landmark dir  : %s", lm_dir if lm_dir else "(none – meshes only)")
     logger.info("Template pid  : %s",
                 resolved_template_pid if resolved_template_pid is not None
-                else "(none — no template overlay)")
+                else "(none – no template overlay)")
 
     available = _discover_patients(extraction_dir, reg_dir)
     logger.info("Patients with complete raw + reg sets: %d", len(available))
@@ -1074,7 +1074,7 @@ def export_html(
         )
         if template_record is None:
             logger.warning(
-                "Template pid %d is missing STLs in %s — template tier disabled.",
+                "Template pid %d is missing STLs in %s – template tier disabled.",
                 resolved_template_pid, extraction_dir,
             )
 
@@ -1171,7 +1171,7 @@ def main() -> None:
     )
     ap.add_argument(
         "--target-dir", type=Path, default=None,
-        help="Per-rib STL directory Scalismo registered against — the raw "
+        help="Per-rib STL directory Scalismo registered against – the raw "
              "mesh-extraction output (default: paths.extracted_stl_dir from "
              "<run-dir>/metadata.json).",
     )

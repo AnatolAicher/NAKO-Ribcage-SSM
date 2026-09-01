@@ -61,7 +61,7 @@ def _reset_pool() -> None:
 def _render_static_in_worker(spec: dict, ext: str, scale: float) -> bytes | str:
     # SVG is rendered by V8 (Vega → SVG). Raster/PDF then go through resvg
     # in pure Rust via svg_to_*, so V8 never has to allocate the pixel
-    # buffer — that's what OOMs `vegalite_to_png` at high DPI for big
+    # buffer – that's what OOMs `vegalite_to_png` at high DPI for big
     # SPLOMs even when the spec itself is small.
     import vl_convert as vlc
     svg = vlc.vegalite_to_svg(spec)
@@ -184,7 +184,7 @@ def save_chart_split(
     skip_existing: bool = False,
     record_manifest: bool = True,
 ) -> dict:
-    """Save two specs to the same ``out_stem`` — one for HTML, one for raster/vector.
+    """Save two specs to the same ``out_stem`` – one for HTML, one for raster/vector.
 
     Multi-PC charts use this to keep all 113 PCs in interactive HTML while the
     static PNG/SVG only carries the leading ``N_PCS_DISPLAY`` so axis labels
@@ -227,7 +227,7 @@ def _dump_failing_spec(spec: dict, out: Path, exc: BaseException) -> Path:
     except OSError:
         return out
     logger.error(
-        "vl-convert failed for %s.%s (%s) — spec dumped to %s",
+        "vl-convert failed for %s.%s (%s) – spec dumped to %s",
         out.stem, out.suffix.lstrip("."), exc.__class__.__name__, dump_path,
     )
     return dump_path
@@ -263,5 +263,5 @@ def _write_static(spec: dict, out: Path, ext: str) -> None:
         out.write_text(result, encoding="utf-8")
     elif ext == "pdf" or ext in _RASTER:
         out.write_bytes(result)
-    else:  # pragma: no cover — guarded by _validate_formats
+    else:  # pragma: no cover – guarded by _validate_formats
         raise ValueError(f"Unsupported static format: {ext}")
