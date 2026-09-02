@@ -18,36 +18,19 @@ generator – is in [`model/`](model/); the pipeline that produced it is in
 
 ## Cite this work
 
-<table>
-<tr>
-<td><b>Zenodo (model data)</b></td>
-<td>
+**Zenodo (model data)**
 
 ```text
 Aicher A, Graf R, Kirschke J, Frauenfelder T, Ensle F, Menze B, Decker J, Kröncke T, Haubold J, Ringhof S, Bamberg F, Schmidt CO, Wielpütz M, Leitzmann M, Willich SN, Keil T, Niendorf T, Pischon T, Schlett C, Möller H. NAKO Human Ribcage Statistical Shape Model (version 1.1.0) [data set]. Zenodo; 2026. https://doi.org/10.5281/zenodo.22230693
 ```
 
-</td>
-</tr>
-<tr>
-<td><b>GitHub (software)</b></td>
-<td>
+**GitHub (software)**
 
 ```text
 Aicher A, Graf R, Kirschke J, Frauenfelder T, Ensle F, Menze B, Decker J, Kröncke T, Haubold J, Ringhof S, Bamberg F, Schmidt CO, Wielpütz M, Leitzmann M, Willich SN, Keil T, Niendorf T, Pischon T, Schlett C, Möller H. NAKO Human Ribcage Statistical Shape Model (version 1.1.0) [software]. GitHub; 2026. https://github.com/AnatolAicher/NAKO-Ribcage-SSM
 ```
 
-</td>
-</tr>
-<tr>
-<td><b>Preprint</b></td>
-<td>tbd</td>
-</tr>
-<tr>
-<td><b>Peer-reviewed article</b></td>
-<td>tbd</td>
-</tr>
-</table>
+**Preprint:** tbd · **Peer-reviewed article:** tbd
 
 <details>
 <summary>BibTeX</summary>
