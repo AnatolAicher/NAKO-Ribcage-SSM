@@ -16,6 +16,36 @@ generator – is in [`model/`](model/); the pipeline that produced it is in
 - Archived releases on Zenodo: DOI [10.5281/zenodo.22230693](https://doi.org/10.5281/zenodo.22230693)
   (resolves to the latest version).
 
+## Cite this work
+
+Shape model and code, archived on Zenodo (all versions: [10.5281/zenodo.22230693](https://doi.org/10.5281/zenodo.22230693); version 1.1.0: [10.5281/zenodo.22237859](https://doi.org/10.5281/zenodo.22237859)):
+
+```text
+Aicher A, Graf R, Kirschke J, Frauenfelder T, Ensle F, Menze B, Decker J, Kröncke T, Haubold J, Ringhof S, Bamberg F, Schmidt CO, Wielpütz M, Leitzmann M, Willich SN, Keil T, Niendorf T, Pischon T, Schlett C, Möller H. NAKO Human Ribcage Statistical Shape Model (version 1.1.0). Zenodo; 2026. https://doi.org/10.5281/zenodo.22230693
+```
+
+```bibtex
+@software{Aicher2026NAKORibcageSSM,
+  author    = {Aicher, Anatol and Graf, Robert and Kirschke, Jan and Frauenfelder, Thomas and
+               Ensle, Falko and Menze, Bjoern and Decker, Josua and Kr{\"o}ncke, Thomas and
+               Haubold, Johannes and Ringhof, Steffen and Bamberg, Fabian and Schmidt, Carsten Oliver and
+               Wielp{\"u}tz, Mark and Leitzmann, Michael and Willich, Stefan N. and Keil, Thomas and
+               Niendorf, Thoralf and Pischon, Tobias and Schlett, Christopher and M{\"o}ller, Hendrik},
+  title     = {{NAKO} Human Ribcage Statistical Shape Model},
+  version   = {1.1.0},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.22230693},
+  url       = {https://github.com/AnatolAicher/NAKO-Ribcage-SSM}
+}
+```
+
+- *Preprint (medRxiv): forthcoming; the DOI will appear here once the preprint is posted.*
+- *Peer-reviewed article: not yet published.*
+
+[`CITATION.cff`](CITATION.cff) carries the same metadata for GitHub's "Cite this repository" button.
+
+
 ## Get the model
 
 Download [`model/`](model/) (about 6 MB) or the
@@ -90,12 +120,6 @@ Scala / Scalismo), data configuration, presets, every pipeline stage and its
 outputs, and the numerical-reproducibility notes. NAKO participant-level data
 cannot be redistributed; access is granted via
 <https://www.nako.de/transferhub>.
-
-## Citing
-
-Please cite the manuscript (reference above) and the archived release;
-[`CITATION.cff`](CITATION.cff) carries the metadata, and GitHub's
-"Cite this repository" button renders it.
 
 ## License and acknowledgement
 
