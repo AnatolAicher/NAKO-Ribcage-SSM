@@ -18,11 +18,39 @@ generator – is in [`model/`](model/); the pipeline that produced it is in
 
 ## Cite this work
 
-Shape model and code, archived on Zenodo (all versions: [10.5281/zenodo.22230693](https://doi.org/10.5281/zenodo.22230693); version 1.1.0: [10.5281/zenodo.22237859](https://doi.org/10.5281/zenodo.22237859)):
+<table>
+<tr>
+<td><b>Zenodo (model data)</b></td>
+<td>
 
 ```text
-Aicher A, Graf R, Kirschke J, Frauenfelder T, Ensle F, Menze B, Decker J, Kröncke T, Haubold J, Ringhof S, Bamberg F, Schmidt CO, Wielpütz M, Leitzmann M, Willich SN, Keil T, Niendorf T, Pischon T, Schlett C, Möller H. NAKO Human Ribcage Statistical Shape Model (version 1.1.0). Zenodo; 2026. https://doi.org/10.5281/zenodo.22230693
+Aicher A, Graf R, Kirschke J, Frauenfelder T, Ensle F, Menze B, Decker J, Kröncke T, Haubold J, Ringhof S, Bamberg F, Schmidt CO, Wielpütz M, Leitzmann M, Willich SN, Keil T, Niendorf T, Pischon T, Schlett C, Möller H. NAKO Human Ribcage Statistical Shape Model (version 1.1.0) [data set]. Zenodo; 2026. https://doi.org/10.5281/zenodo.22230693
 ```
+
+</td>
+</tr>
+<tr>
+<td><b>GitHub (software)</b></td>
+<td>
+
+```text
+Aicher A, Graf R, Kirschke J, Frauenfelder T, Ensle F, Menze B, Decker J, Kröncke T, Haubold J, Ringhof S, Bamberg F, Schmidt CO, Wielpütz M, Leitzmann M, Willich SN, Keil T, Niendorf T, Pischon T, Schlett C, Möller H. NAKO Human Ribcage Statistical Shape Model (version 1.1.0) [software]. GitHub; 2026. https://github.com/AnatolAicher/NAKO-Ribcage-SSM
+```
+
+</td>
+</tr>
+<tr>
+<td><b>Preprint</b></td>
+<td>tbd</td>
+</tr>
+<tr>
+<td><b>Peer-reviewed article</b></td>
+<td>tbd</td>
+</tr>
+</table>
+
+<details>
+<summary>BibTeX</summary>
 
 ```bibtex
 @software{Aicher2026NAKORibcageSSM,
@@ -40,8 +68,7 @@ Aicher A, Graf R, Kirschke J, Frauenfelder T, Ensle F, Menze B, Decker J, Krönc
 }
 ```
 
-- *Preprint (medRxiv): forthcoming; the DOI will appear here once the preprint is posted.*
-- *Peer-reviewed article: not yet published.*
+</details>
 
 [`CITATION.cff`](CITATION.cff) carries the same metadata for GitHub's "Cite this repository" button.
 
