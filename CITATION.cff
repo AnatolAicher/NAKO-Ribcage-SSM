@@ -11,6 +11,57 @@ license: MIT
 doi: 10.5281/zenodo.22230693
 repository-code: https://github.com/AnatolAicher/NAKO-Ribcage-SSM
 url: https://anatolaicher.github.io/NAKO-Ribcage-Manuscript/
+preferred-citation:
+  type: article
+  title: 'How Sex, Age, Adiposity, and Smoking Shape the Human Rib Cage: Evidence from 26,275
+    Whole-Body MRIs across the German National Cohort (NAKO)'
+  journal: medRxiv
+  year: 2026
+  month: 9
+  doi: 10.64898/2026.09.01.26361964
+  url: https://doi.org/10.64898/2026.09.01.26361964
+  notes: Preprint
+  authors:
+  - family-names: Aicher
+    given-names: Anatol
+  - family-names: Graf
+    given-names: Robert
+  - family-names: Kirschke
+    given-names: Jan
+  - family-names: Frauenfelder
+    given-names: Thomas
+  - family-names: Ensle
+    given-names: Falko
+  - family-names: Menze
+    given-names: Bjoern
+  - family-names: Decker
+    given-names: Josua
+  - family-names: Kröncke
+    given-names: Thomas
+  - family-names: Haubold
+    given-names: Johannes
+  - family-names: Ringhof
+    given-names: Steffen
+  - family-names: Bamberg
+    given-names: Fabian
+  - family-names: Schmidt
+    given-names: Carsten Oliver
+  - family-names: Wielpütz
+    given-names: Mark
+  - family-names: Leitzmann
+    given-names: Michael
+  - family-names: Willich
+    given-names: Stefan N.
+  - family-names: Keil
+    given-names: Thomas
+  - family-names: Niendorf
+    given-names: Thoralf
+  - family-names: Pischon
+    given-names: Tobias
+  - family-names: Schlett
+    given-names: Christopher
+  - family-names: Möller
+    given-names: Hendrik
 keywords:
 - statistical shape model
 - rib cage
