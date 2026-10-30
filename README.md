@@ -161,6 +161,15 @@ of this research initiative. Members and affiliations of the NAKO Investigator
 Consortium can be accessed via
 [www.nako.de/principal-investigators](https://www.nako.de/principal-investigators).
 
+## Use of AI tools
+
+Generative AI tools (Claude, Anthropic) were used to help write and refactor
+code in this repository and to draft and edit its documentation and the
+accompanying manuscript. The research question, study design, methodological
+choices and interpretation of results are the authors' own. All AI-assisted
+output was reviewed, tested and edited by the authors, who take full
+responsibility for the content of this repository and the publication.
+
 ## Contact
 
 Anatol Aicher · University of Zurich & University Hospital Zurich ·
